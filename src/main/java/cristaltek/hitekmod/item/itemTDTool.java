@@ -50,8 +50,11 @@ public float func_150893_a(ItemStack stack, Block block) {
 		//System.out.println("target: " + x + ", " + y + ", " + z);
 		int metadata = world.getBlockMetadata(x, y, z);
 		Block block = world.getBlock(x, y, z);
-		block.removedByPlayer(world, player, x, y, z, true);
-		block.harvestBlock(world, player, x, y, z, metadata);
+		boolean willHarvest = block.canHarvestBlock(player, metadata);
+		
+		boolean isDestroyed = block.removedByPlayer(world, player, x, y, z, willHarvest);
+		if (isDestroyed && willHarvest)
+			block.harvestBlock(world, player, x, y, z, metadata);
 		
 		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 	}

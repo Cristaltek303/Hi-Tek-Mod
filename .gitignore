@@ -1,0 +1,29 @@
+#eclipse
+/bin
+/.settings
+/.classpath
+/.project
+
+#idea
+/.idea
+*.iml
+
+#gradle
+/build
+/.gradle
+
+#occupational hazards
+/eclipse/
+/repo/
+/buildSrc
+
+#MinecraftForge stuff
+CREDITS-fml.txt
+LICENSE-fml.txt
+MinecraftForge-Credits.txt
+MinecraftForge-License.txt
+README.txt
+*changelog.txt
+
+#Mac OS X garbage
+.DS_Store

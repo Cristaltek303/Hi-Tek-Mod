@@ -1,0 +1,11 @@
+item.itemDarkstar.name=Darkstar
+item.itemConcentratedDarkstar.name=Concentrated Darkstar
+item.itemStaffHandle.name=Staff Handle
+item.itemImbuer.name=Imbuer
+item.itemHandle.name=Handle
+item.itemDarkEnergyIngot.name=Dark Energy Ingot
+item.itemTDTool.name=Temporal Decomposing Tool
+
+tile.blockDarkstarBlock.name=Darkstar Block
+
+itemGroup.tabHiTekMod=Hi-Tek Mod

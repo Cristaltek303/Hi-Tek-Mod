@@ -16,7 +16,9 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.sound.PlaySoundEffectEvent;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 
 public class ItemTDTool extends ItemPickaxe {
 	
@@ -53,6 +55,9 @@ public class ItemTDTool extends ItemPickaxe {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (player instanceof EntityPlayerMP)
 			((EntityPlayerMP)player).theItemInWorldManager.onBlockClicked(x, y, z, side);
+		
+		Block block = world.getBlock(x, y, z);
+		world.playAuxSFXAtEntity(player, 2001, x, y, z, Block.getIdFromBlock(block) + (world.getBlockMetadata(x, y, z) << 12));
 		
 		return true;
 	}

@@ -4,8 +4,9 @@ item.staffHandle.name=Staff Handle
 item.imbuer.name=Imbuer
 item.handle.name=Handle
 item.darkEnergyIngot.name=Dark Energy Ingot
-item.itemTDTool.name=Temporal Decomposing Tool
 
-tile.blockDarkstarBlock.name=Darkstar Block
+item.temporalDecompositionTool.name=Temporal Decomposing Tool
+
+tile.darkstarBlock.name=Darkstar Block
 
 itemGroup.tabHiTekMod=Hi-Tek Mod

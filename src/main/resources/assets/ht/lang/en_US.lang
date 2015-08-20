@@ -1,9 +1,9 @@
-item.itemDarkstar.name=Darkstar
-item.itemConcentratedDarkstar.name=Concentrated Darkstar
-item.itemStaffHandle.name=Staff Handle
-item.itemImbuer.name=Imbuer
-item.itemHandle.name=Handle
-item.itemDarkEnergyIngot.name=Dark Energy Ingot
+item.darkstar.name=Darkstar
+item.concentratedDarkstar.name=Concentrated Darkstar
+item.staffHandle.name=Staff Handle
+item.imbuer.name=Imbuer
+item.handle.name=Handle
+item.darkEnergyIngot.name=Dark Energy Ingot
 item.itemTDTool.name=Temporal Decomposing Tool
 
 tile.blockDarkstarBlock.name=Darkstar Block

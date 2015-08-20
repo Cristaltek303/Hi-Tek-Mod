@@ -8,8 +8,8 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -36,27 +36,13 @@ public float func_150893_a(ItemStack stack, Block block) {
         return this.efficiencyOnProperMaterial;
     return effectiveAgainst.contains(block) ? this.efficiencyOnProperMaterial : super.func_150893_a(stack, block);
 	}
-//
-//@Override
-//	//Right Click breaks 1 Block
-//	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-//		hitEntity(itemstack, )
-//	return itemstack;
-//	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-			float hitX, float hitY, float hitZ) {
-		//System.out.println("target: " + x + ", " + y + ", " + z);
-		int metadata = world.getBlockMetadata(x, y, z);
-		Block block = world.getBlock(x, y, z);
-		boolean willHarvest = block.canHarvestBlock(player, metadata);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (player instanceof EntityPlayerMP)
+			((EntityPlayerMP)player).theItemInWorldManager.onBlockClicked(x, y, z, side);
 		
-		boolean isDestroyed = block.removedByPlayer(world, player, x, y, z, willHarvest);
-		if (isDestroyed && willHarvest)
-			block.harvestBlock(world, player, x, y, z, metadata);
-		
-		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+		return true;
 	}
 }
 

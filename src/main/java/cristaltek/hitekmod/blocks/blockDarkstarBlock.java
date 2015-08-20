@@ -1,11 +1,11 @@
-package cristaltek.hitekmod;
+package cristaltek.hitekmod.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public class blockDarkstarBlock extends Block {
 
-	protected blockDarkstarBlock(Material material) {
+	public blockDarkstarBlock(Material material) {
 		super(material);
 
 	}

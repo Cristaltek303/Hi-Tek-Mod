@@ -1,4 +1,4 @@
-package cristaltek.hitekmod.item;
+package cristaltek.hitekmod.items;
 
 import java.util.Set;
 

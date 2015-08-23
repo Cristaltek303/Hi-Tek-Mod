@@ -9,6 +9,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -33,10 +35,22 @@ public class ItemTDTool extends ItemPickaxe {
 		GameRegistry.registerItem(this, name);
 	}
 	
+	//Fortune/Silk---------------------------------------------------
+	
+	public void onUpdate(ItemStack itemstack, World world, net.minecraft.entity.Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+		if(itemstack.isItemEnchanted() == false){
+			itemstack.addEnchantment(Enchantment.fortune, 3);
+		}
+	};
+	
+	//---------------------------------------------------
+	
 	@Override
 	public Set<String> getToolClasses (ItemStack stack) {
 		return ImmutableSet.of("pickaxe", "spade");
     }
+	
+	//Block to Harvest--------------------------------------------------------------------------------
 	
 	public static Set effectiveAgainst = Sets.newHashSet(new Block[] {
 	    Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, 
@@ -50,6 +64,8 @@ public class ItemTDTool extends ItemPickaxe {
 			return this.efficiencyOnProperMaterial;
 		return effectiveAgainst.contains(block) ? this.efficiencyOnProperMaterial : super.func_150893_a(stack, block);
 	}
+	
+	//Rightclick function------------------------------------------------------------------------------
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
@@ -61,5 +77,8 @@ public class ItemTDTool extends ItemPickaxe {
 		
 		return true;
 	}
+	
+
+	
 }
 

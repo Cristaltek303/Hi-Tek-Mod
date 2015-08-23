@@ -27,7 +27,7 @@ public class ModItems {
 
 	public static void init() {
 		
-		//Items-------------------------------------------------------------------------------------------------------------------------------------------
+		//Items
 		
 		darkstar = new ItemBase("darkstar");
 		concentratedDarkstar = new ItemBase("concentratedDarkstar");
@@ -36,11 +36,11 @@ public class ModItems {
 		handle = new ItemBase("handle");
 		darkEnergyIngot = new ItemBase("darkEnergyIngot");
 		
-		//Tool/Weapons-------------------------------------------------------------------------------------------------------------------------------------------
+		//Tool/Weapons
         
 		TDTool = new ItemTDTool("temporalDecompositionTool");
 		
 		//Armor
-		htHelmet = new itemhtHelmet("htArmormaterial");
+		htHelmet = new itemhtHelmet("htHelmet", 0);
 	}
 }

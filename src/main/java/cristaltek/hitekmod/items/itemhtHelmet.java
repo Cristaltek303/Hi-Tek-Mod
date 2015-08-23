@@ -9,20 +9,13 @@ import net.minecraftforge.common.util.EnumHelper;
 public class itemhtHelmet extends ItemArmor {
 	
 	//Armor Material
-		public static final ItemArmor.ArmorMaterial material = EnumHelper.addArmorMaterial("htArmorMaterial", -1, new int[]{3,8,6,3}, 35);
+	public static final ArmorMaterial material = EnumHelper.addArmorMaterial("htArmorMaterial", -1, new int[]{3,8,6,3}, 35);
 
-		public itemhtHelmet(String name, int type) {
-			super(material, 0, type);
-			setUnlocalizedName(name);
-			setTextureName("ht:" + name);
-			setCreativeTab(HiTekMod.tabHiTekMod);
-			GameRegistry.registerItem(this, name);
-		}
-		
-	
-	public itemhtHelmet(ArmorMaterial armorMaterial, int renderIndex, int armorType) {
-		super(armorMaterial, renderIndex, armorType);
+	public itemhtHelmet(String name, int type) {
+		super(material, 0, type);
+		setUnlocalizedName(name);
+		setTextureName("ht:" + name);
+		setCreativeTab(HiTekMod.tabHiTekMod);
+		GameRegistry.registerItem(this, name);
 	}
-
-	
 }

@@ -18,6 +18,12 @@ public class ModItems {
 	
 	//Tools/Weapons
 	public static Item TDTool;
+	
+	//Armor
+	public static Item htHelmet;
+	public static Item htChestplate;
+	public static Item htLeggings;
+	public static Item htBoots;
 
 	public static void init() {
 		
@@ -33,5 +39,8 @@ public class ModItems {
 		//Tool/Weapons-------------------------------------------------------------------------------------------------------------------------------------------
         
 		TDTool = new ItemTDTool("temporalDecompositionTool");
+		
+		//Armor
+		htHelmet = new itemhtHelmet("htArmormaterial");
 	}
 }

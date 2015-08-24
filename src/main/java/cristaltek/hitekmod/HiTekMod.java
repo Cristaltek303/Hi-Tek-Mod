@@ -27,6 +27,7 @@ public class HiTekMod {
 	public void Init(FMLInitializationEvent event) {
 		//Proxy, TileEntity, entity, GUI and Registering
 		
+		
 		//Recepies
 		
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.darkstarBlock), new Object[]{"DDD","DDD","DDD", 'D', ModItems.darkstar}); //Darkstar Block

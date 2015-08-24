@@ -2,6 +2,7 @@ package cristaltek.hitekmod.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;
+import cristaltek.hitekmod.items.item.ItemhtArmor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
@@ -41,6 +42,9 @@ public class ModItems {
 		TDTool = new ItemTDTool("temporalDecompositionTool");
 		
 		//Armor
-		htHelmet = new itemhtHelmet("htHelmet", 0);
+		htHelmet = new ItemhtArmor("ItemhtArmor", 0);
+		htChestplate = new ItemhtArmor("ItemhtArmor", 1);
+     	htLeggings = new ItemhtArmor("ItemhtArmor", 2);
+		htBoots = new ItemhtArmor("ItemhtArmor", 3);
 	}
 }

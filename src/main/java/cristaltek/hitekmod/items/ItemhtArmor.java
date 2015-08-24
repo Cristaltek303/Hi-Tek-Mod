@@ -1,4 +1,4 @@
-package cristaltek.hitekmod.items.item;
+package cristaltek.hitekmod.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;

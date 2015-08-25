@@ -25,7 +25,7 @@ import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 public class ItemTDTool extends ItemPickaxe {
 	
 	//Tool/Weapons Materials
-	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 1.0F, 35);
+	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 0.0F, 35);
 
 	public ItemTDTool(String name) {
 		super(material);
@@ -33,6 +33,12 @@ public class ItemTDTool extends ItemPickaxe {
 		setTextureName("ht:" + name);
 		setCreativeTab(HiTekMod.tabHiTekMod);
 		GameRegistry.registerItem(this, name);
+		
+		//Armor characteristics
+		setMaxStackSize(1);
+		setMaxDamage(0);
+		canRepair = false;
+		
 	}
 	
 	//Fortune/Silk---------------------------------------------------

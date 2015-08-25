@@ -18,6 +18,7 @@ public class ModItems {
 	
 	//Tools/Weapons
 	public static Item TDTool;
+	public static Item OPSword;
 	
 	//Armor
 	public static Item htHelmet;
@@ -39,6 +40,8 @@ public class ModItems {
 		//Tool/Weapons
         
 		TDTool = new ItemTDTool("temporalDecompositionTool");
+		OPSword = new ItemOPSword("OPSword");
+		
 		
 		//Armor
 		htHelmet = new ItemhtArmor("htHelmet", 0);

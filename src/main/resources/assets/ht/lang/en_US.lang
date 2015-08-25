@@ -5,13 +5,14 @@ item.imbuer.name=Imbuer
 item.handle.name=Handle
 item.darkEnergyIngot.name=Dark Energy Ingot
 
-item.htHelmet.name=Helmet
-item.htChestplate.name=Chestplate
-item.htLeggings.name=Leggings
-item.htBoots.name=Boots
+item.htHelmet.name=XLF-1 Helmet
+item.htChestplate.name=XLF-1 Chestplate
+item.htLeggings.name=XLF-1 Leggings
+item.htBoots.name=XLF-1 Boots
 
 
 item.temporalDecompositionTool.name=Temporal Decomposing Tool
+item.OPSword.name=Filetierer
 
 tile.darkstarBlock.name=Darkstar Block
 

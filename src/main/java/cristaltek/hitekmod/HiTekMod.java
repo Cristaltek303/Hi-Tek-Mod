@@ -2,11 +2,13 @@ package cristaltek.hitekmod;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
+import cristaltek.hitekmod.common.CommonProxy;
 import cristaltek.hitekmod.items.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -15,6 +17,9 @@ import net.minecraft.item.ItemStack;
 
 @Mod(modid = "ht",name = "Hit-Tek Mod", version = "1.0")
 public class HiTekMod {
+	
+	@SidedProxy(clientSide = "cristaltek.hitekmod.client.ClientProxy", serverSide = "cristaltek.hitekmod.common.CommonProxy")
+	public static CommonProxy proxy;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -41,6 +46,7 @@ public class HiTekMod {
 		GameRegistry.addRecipe(new ItemStack(ModItems.htLeggings), new Object[]{"BAB","ACA","B B", 'A', ModItems.concentratedDarkstar, 'B', ModItems.darkEnergyIngot, 'C', Items.diamond_leggings});
 		GameRegistry.addRecipe(new ItemStack(ModItems.htBoots), new Object[]{"   ","ACA","B B", 'A', ModItems.concentratedDarkstar, 'B', ModItems.darkEnergyIngot, 'C', Items.diamond_boots});
 
+		proxy.registerRenderInformation();
 	}
 	
 	@EventHandler

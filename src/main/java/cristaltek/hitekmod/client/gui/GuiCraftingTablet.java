@@ -19,8 +19,8 @@ public class GuiCraftingTablet extends GuiScreen{
 	public void drawScreen(int x, int y, float ticks) {
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
-		GL11.glColor4f(1, 1, 1, 0.35F); //Alpha = Transparent
-		drawDefaultBackground();
+		GL11.glColor4f(1, 1, 1, 0.85F); //Alpha = Transparent
+		//drawDefaultBackground();
 		mc.renderEngine.bindTexture(new ResourceLocation(cristaltek.hitekmod.HiTekMod.MOD_ID, "textures/gui/guiCraftingTablet.png"));
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
 		

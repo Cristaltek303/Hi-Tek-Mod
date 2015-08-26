@@ -5,6 +5,11 @@ item.imbuer.name=Imbuer
 item.handle.name=Handle
 item.darkEnergyIngot.name=Dark Energy Ingot
 item.CraftingChip.name=Crafting Chip
+item.RawSilicon.name=Raw Silicon
+item.Silicon.name=Silicon
+item.CircuitBoard.name=V.I. Circuit Board
+item.VIChip.name=V.I.-Chip
+item.VIStabilizer.name=V.I.-Stabilizer
 
 item.htHelmet.name=XLF-1 Helmet
 item.htChestplate.name=XLF-1 Chestplate

@@ -9,7 +9,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-
+	
+	
 	@Override
 	public void registerRenderInformation() {
 		ItemRenderer itemRenderer = new ItemRenderer();

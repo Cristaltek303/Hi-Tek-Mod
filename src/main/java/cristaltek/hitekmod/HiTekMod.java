@@ -16,8 +16,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-@Mod(modid = "ht",name = "Hit-Tek Mod", version = "1.0")
+@Mod(modid = "ht",name = "HiTek Mod", version = "1.0")
 public class HiTekMod {
+	
+	public static final String MOD_ID = "ht";
+	public static final String MOD_NAME = "HiTek Mod";
+	public static final String MOD_VERSION = "1.0";
 	
 	@SidedProxy(clientSide = "cristaltek.hitekmod.client.ClientProxy", serverSide = "cristaltek.hitekmod.common.CommonProxy")
 	public static CommonProxy proxy;

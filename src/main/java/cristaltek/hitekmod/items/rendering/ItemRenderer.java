@@ -55,7 +55,7 @@ public class ItemRenderer implements IItemRenderer {
         float f1 = iicon.getMaxU();
         float f2 = iicon.getMinV();
         float f3 = iicon.getMaxV();
-        net.minecraft.client.renderer.ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
+        net.minecraft.client.renderer.ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0325F);
         
         texturemanager.bindTexture(texturemanager.getResourceLocation(itemStack.getItemSpriteNumber()));
         TextureUtil.func_147945_b();

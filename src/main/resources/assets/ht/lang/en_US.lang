@@ -4,6 +4,7 @@ item.staffHandle.name=Staff Handle
 item.imbuer.name=Imbuer
 item.handle.name=Handle
 item.darkEnergyIngot.name=Dark Energy Ingot
+item.CraftingChip.name=Crafting Chip
 
 item.htHelmet.name=XLF-1 Helmet
 item.htChestplate.name=XLF-1 Chestplate
@@ -13,6 +14,7 @@ item.htBoots.name=XLF-1 Boots
 
 item.temporalDecompositionTool.name=Temporal Decomposing Tool
 item.OPSword.name=Filetierer
+item.CraftingTablet.name=Crafting Tablet
 
 tile.darkstarBlock.name=Darkstar Block
 

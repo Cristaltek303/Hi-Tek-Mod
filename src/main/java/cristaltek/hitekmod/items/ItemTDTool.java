@@ -10,22 +10,20 @@ import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.PlaySoundEffectEvent;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 
 public class ItemTDTool extends ItemPickaxe {
 	
 	//Tool/Weapons Materials
 	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 0.0F, 35);
+	
+	private boolean silktouchMode;
 
 	public ItemTDTool(String name) {
 		super(material);
@@ -42,12 +40,27 @@ public class ItemTDTool extends ItemPickaxe {
 	}
 	
 	//Fortune/Silk---------------------------------------------------
-	
+	@Override
 	public void onUpdate(ItemStack itemstack, World world, net.minecraft.entity.Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
 		if(itemstack.isItemEnchanted() == false){
 			itemstack.addEnchantment(Enchantment.fortune, 3);
+			silktouchMode = false;
 		}
-	};
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+		if (!world.isRemote && player.isSneaking()) {
+			itemstack.getEnchantmentTagList().removeTag(0);
+			silktouchMode = !silktouchMode;
+			
+			if (silktouchMode)
+				itemstack.addEnchantment(Enchantment.silkTouch, 1);
+			else
+				itemstack.addEnchantment(Enchantment.fortune, 3);
+		}
+		return itemstack;
+	}
 	
 	//---------------------------------------------------
 	

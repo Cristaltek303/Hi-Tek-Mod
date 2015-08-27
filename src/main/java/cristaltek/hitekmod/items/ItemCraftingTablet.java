@@ -2,8 +2,6 @@ package cristaltek.hitekmod.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;
-import cristaltek.hitekmod.client.gui.GuiCraftingTablet;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,10 +22,8 @@ public class ItemCraftingTablet extends Item {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
-		
-		Minecraft.getMinecraft().displayGuiScreen(new GuiCraftingTablet());
-		
+		player.openGui(HiTekMod.instance, 0, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+
 		return super.onItemRightClick(item, world, player);
 	}
-    
 }

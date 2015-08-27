@@ -2,10 +2,12 @@ package cristaltek.hitekmod;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
 import cristaltek.hitekmod.common.CommonProxy;
@@ -16,13 +18,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-@Mod(modid = "ht",name = "HiTek Mod", version = "1.0")
+@Mod(modid = HiTekMod.MOD_ID, name = HiTekMod.MOD_NAME, version = HiTekMod.MOD_VERSION)
 public class HiTekMod {
 	
 	public static final String MOD_ID = "ht";
 	public static final String MOD_NAME = "HiTek Mod";
 	public static final String MOD_VERSION = "1.0";
-	
+
+	@Instance(MOD_ID)
+	public static HiTekMod instance;
+
 	@SidedProxy(clientSide = "cristaltek.hitekmod.client.ClientProxy", serverSide = "cristaltek.hitekmod.common.CommonProxy")
 	public static CommonProxy proxy;
 	
@@ -31,6 +36,8 @@ public class HiTekMod {
 		
 		ModItems.init();
 		ModBlocks.init();
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(HiTekMod.instance, proxy);
 	}
 	
 	@EventHandler

@@ -24,6 +24,9 @@ public class HiTekMod {
 	public static final String MOD_ID = "ht";
 	public static final String MOD_NAME = "HiTek Mod";
 	public static final String MOD_VERSION = "1.0";
+	
+	//banal
+
 
 	@Instance(MOD_ID)
 	public static HiTekMod instance;

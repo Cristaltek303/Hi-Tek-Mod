@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import cristaltek.hitekmod.HiTekMod;
 import cristaltek.hitekmod.client.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -24,7 +25,7 @@ public class GuiCraftingTablet extends GuiContainer {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.9F); //Alpha = Transparent
-		mc.getTextureManager().bindTexture(new ResourceLocation(HiTekMod.MOD_ID, "textures/gui/guiCraftingTablet.png"));
+		mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MOD_ID, "textures/gui/guiCraftingTablet.png"));
 		drawTexturedModalRect(guiX, guiY, 0, 0, xSize, ySize);
 	}
 }

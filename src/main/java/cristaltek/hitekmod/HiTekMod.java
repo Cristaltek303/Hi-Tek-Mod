@@ -47,13 +47,11 @@ public class HiTekMod {
 		
 		//Recipes
 		//Item Recipes
-		GameRegistry.addRecipe(new ItemStack(ModItems.RawSilicon, 16), new Object[]{"A  ","B  ","C  ", 'A', Items.water_bucket, 'B', Blocks.sand, 'C', Blocks.dirt});
-		GameRegistry.addSmelting(ModItems.RawSilicon, new ItemStack (ModItems.Silicon), 0.0F);
-		GameRegistry.addRecipe(new ItemStack(ModItems.CircuitBoard), new Object[]{"ABA","BAB","ABA", 'A', Items.gold_nugget, 'B', ModItems.Silicon});
-		GameRegistry.addRecipe(new ItemStack(ModItems.VIChip), new Object[]{"BAB","ACA","BAB", 'A', Items.gold_nugget, 'B', Items.redstone, 'C', ModItems.CircuitBoard});
-		GameRegistry.addRecipe(new ItemStack(ModItems.VIStabilizer),new Object[]{"ABA","BCB","ABA", 'A', ModItems.darkEnergyIngot, 'B', ModItems.CircuitBoard, 'C', ModItems.VIChip});
-		
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.darkstarBlock), new Object[]{"DDD","DDD","DDD", 'D', ModItems.darkstar}); //Darkstar Block
+		GameRegistry.addRecipe(new ItemStack(ModItems.RawSilicon, 16), new Object[]{"A  ","B  ","C  ", 'A', Items.water_bucket, 'B', Blocks.sand, 'C', Blocks.dirt});//Raw Silicon
+		GameRegistry.addSmelting(ModItems.RawSilicon, new ItemStack (ModItems.Silicon), 0.0F);//Silicon
+		GameRegistry.addRecipe(new ItemStack(ModItems.CircuitBoard), new Object[]{"ABA","BAB","ABA", 'A', Items.gold_nugget, 'B', ModItems.Silicon});//Circuit Board
+		GameRegistry.addRecipe(new ItemStack(ModItems.VIChip), new Object[]{"BAB","ACA","BAB", 'A', Items.gold_nugget, 'B', Items.redstone, 'C', ModItems.CircuitBoard});//V.I.-Chip
+		GameRegistry.addRecipe(new ItemStack(ModItems.VIStabilizer),new Object[]{"ABA","BCB","ABA", 'A', ModItems.darkEnergyIngot, 'B', ModItems.CircuitBoard, 'C', ModItems.VIChip});//V.I.-Stabilizer
 		GameRegistry.addRecipe(new ItemStack(ModItems.imbuer), new Object[]{" D ","DAD"," D ", 'A', ModItems.darkEnergyIngot, 'D', Items.diamond}); //Imbuer
 		GameRegistry.addRecipe(new ItemStack(ModItems.concentratedDarkstar), new Object[]{"DDD","DID","DDD", 'D', ModItems.darkstar, 'I', ModItems.imbuer}); // Concentrated Darkstar
 		GameRegistry.addRecipe(new ItemStack(ModItems.staffHandle), new Object[]{" D "," H "," D ", 'D', ModItems.darkstar, 'H', ModItems.handle}); //StaffHandle
@@ -68,7 +66,11 @@ public class HiTekMod {
 		GameRegistry.addRecipe(new ItemStack(ModItems.CraftingTablet),new Object[]{"CCC","DAD","BBB", 'A', ModItems.CraftingChip, 'B', ModItems.darkEnergyIngot, 'C', Blocks.glass_pane, 'D', Blocks.stone_button});//CraftingTablet
 		GameRegistry.addRecipe(new ItemStack(ModItems.TDTool),new Object[]{"AAA","ABA"," B ",'A', ModItems.concentratedDarkstar, 'B', ModItems.staffHandle});//TDTool
 		GameRegistry.addRecipe(new ItemStack(ModItems.OPSword),new Object[]{" A "," A ","CBC", 'A', ModItems.concentratedDarkstar, 'B', ModItems.handle, 'C', ModItems.darkEnergyIngot});//OPSword 
-
+		//Blocks
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.DarkIronBlock), new Object[]{"AAA", "AAA", "AAA", 'A', ModItems.darkEnergyIngot});//Dark Iron Block
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.darkstarBlock), new Object[]{"DDD","DDD","DDD", 'D', ModItems.darkstar}); //Darkstar Block
+		
+		
 		proxy.registerRenderInformation();
 	}
 	

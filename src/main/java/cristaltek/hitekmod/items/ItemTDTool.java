@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -54,10 +55,14 @@ public class ItemTDTool extends ItemPickaxe {
 			itemstack.getEnchantmentTagList().removeTag(0);
 			silktouchMode = !silktouchMode;
 			
-			if (silktouchMode)
+			if (silktouchMode) {
 				itemstack.addEnchantment(Enchantment.silkTouch, 1);
-			else
+				player.addChatMessage(new ChatComponentText("Silk-Touch-Mode enabled"));
+			}
+			else {
 				itemstack.addEnchantment(Enchantment.fortune, 3);
+				player.addChatMessage(new ChatComponentText("Fortune-Mode enabled"));
+			}
 		}
 		return itemstack;
 	}
@@ -98,6 +103,9 @@ public class ItemTDTool extends ItemPickaxe {
 	}
 	
 
-	
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return false;
+	}
 }
 

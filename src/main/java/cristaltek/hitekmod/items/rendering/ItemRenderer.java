@@ -3,6 +3,7 @@ package cristaltek.hitekmod.items.rendering;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cristaltek.hitekmod.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -48,7 +49,11 @@ public class ItemRenderer implements IItemRenderer {
         TextureUtil.func_152777_a(false, false, 1.0F);
         
         GL11.glScalef(2.0F, 2.0F, 2.0F);
-        GL11.glTranslatef(-0.55F, 0.05F, 0.0F);
+        
+        if (item == ModItems.OPSword)
+        	GL11.glTranslatef(-0.55F, 0.05F, 0.0F);
+        else if (item == ModItems.TDTool)
+        	GL11.glTranslatef(-0.35F, -0.15F, 0.0F);
 
         Tessellator tessellator = Tessellator.instance;
         float f = iicon.getMinU();

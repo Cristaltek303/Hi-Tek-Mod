@@ -12,23 +12,18 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
 import cristaltek.hitekmod.common.CommonProxy;
 import cristaltek.hitekmod.items.ModItems;
+import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-@Mod(modid = HiTekMod.MOD_ID, name = HiTekMod.MOD_NAME, version = HiTekMod.MOD_VERSION)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
 public class HiTekMod {
-	
-	public static final String MOD_ID = "ht";
-	public static final String MOD_NAME = "HiTek Mod";
-	public static final String MOD_VERSION = "1.0";
-	
-	//banal
 
 
-	@Instance(MOD_ID)
+	@Instance(Reference.MOD_ID)
 	public static HiTekMod instance;
 
 	@SidedProxy(clientSide = "cristaltek.hitekmod.client.ClientProxy", serverSide = "cristaltek.hitekmod.common.CommonProxy")

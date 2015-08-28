@@ -50,21 +50,6 @@ public class ContainerCraftingTablet extends Container {
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-
-		if (!this.worldObj.isRemote) {
-			for (int i = 0; i < 9; ++i) {
-				ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
-
-				if (itemstack != null) {
-					player.dropPlayerItemWithRandomChoice(itemstack, false);
-				}
-			}
-		}
-	}
-
-	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
 	}

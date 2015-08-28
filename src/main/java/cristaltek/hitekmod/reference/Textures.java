@@ -7,7 +7,7 @@ public class Textures {
 	
     public static final class Gui {
     	
-        public static final ResourceLocation WIDGETS = new ResourceLocation(HiTekMod.MOD_ID, "textures/gui/guiCraftingTabletWidgets.png");
+        public static final ResourceLocation WIDGETS = new ResourceLocation(Reference.MOD_ID, "textures/gui/guiCraftingTabletWidgets.png");
 
     }
     

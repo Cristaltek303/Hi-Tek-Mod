@@ -1,5 +1,7 @@
 package cristaltek.hitekmod.client.gui.button;
 
+import org.lwjgl.opengl.GL11;
+
 import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -23,13 +25,13 @@ public class CraftingTabletButton extends GuiButton  {
 		super(id, xPos, yPos, width, height, "");
 		
 		if (type == SPIN) {
-            iconOffsetX = 64;
+            iconOffsetX = 0;
             iconOffsetY = 16;
         } else if (type == BALANCE) {
-            iconOffsetX = 64;
+            iconOffsetX = 0;
             iconOffsetY = 32;
         } else if (type == EMPTY) {
-            iconOffsetX = 64;
+            iconOffsetX = 0;
             iconOffsetY = 0;
             }
         }
@@ -44,7 +46,8 @@ public class CraftingTabletButton extends GuiButton  {
 
 	            int fromLeft = iconOffsetX + (h-1) * 16;
 
-	            this.drawTexturedModalRect(this.xPosition, this.yPosition, fromLeft, iconOffsetY, 16, 16);
+	    		GL11.glDisable(GL11.GL_BLEND);
+	            this.drawTexturedModalRect(this.xPosition, this.yPosition, fromLeft, iconOffsetY, 13, 13);
 	        }
 		
 	}

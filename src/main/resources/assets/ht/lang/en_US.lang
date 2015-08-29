@@ -22,6 +22,6 @@ item.OPSword.name=Filetierer
 item.CraftingTablet.name=Crafting Tablet
 
 tile.darkstarBlock.name=Darkstar Block
-tile.DarkIronBlock.name=Dark Iron Block
+tile.darkIronBlock.name=Dark Iron Block
 
 itemGroup.tabHiTekMod=Hi-Tek Mod

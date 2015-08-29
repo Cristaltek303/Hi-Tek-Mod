@@ -23,6 +23,7 @@ public class ModItems {
 	public static Item TDTool; //WIP
 	public static Item OPSword; //WIP
 	public static Item CraftingTablet; //WIP
+	public static Item Magnet;
 	
 	//Armor
 	public static Item htHelmet; //WIP
@@ -49,6 +50,7 @@ public class ModItems {
 		TDTool = new ItemTDTool("temporalDecompositionTool");
 		OPSword = new ItemOPSword("OPSword");
 		CraftingTablet = new ItemCraftingTablet("CraftingTablet");
+		Magnet = new ItemMagnet("Magnet");
 		
 		//Armor
 		htHelmet = new ItemhtArmor("htHelmet", 0);

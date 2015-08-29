@@ -29,7 +29,8 @@ public class Recipes {
 		//Tool Recipes
 		GameRegistry.addRecipe(new ItemStack(ModItems.CraftingTablet),new Object[]{"CCC","DAD","BBB", 'A', ModItems.craftingChip, 'B', ModItems.darkEnergyIngot, 'C', Blocks.glass_pane, 'D', Blocks.stone_button});//CraftingTablet
 		GameRegistry.addRecipe(new ItemStack(ModItems.TDTool),new Object[]{"AAA","ABA"," B ",'A', ModItems.concentratedDarkstar, 'B', ModItems.staffHandle});//TDTool
-		GameRegistry.addRecipe(new ItemStack(ModItems.OPSword),new Object[]{" A "," A ","CBC", 'A', ModItems.concentratedDarkstar, 'B', ModItems.handle, 'C', ModItems.darkEnergyIngot});//OPSword 
+		GameRegistry.addRecipe(new ItemStack(ModItems.OPSword),new Object[]{" A "," A ","CBC", 'A', ModItems.concentratedDarkstar, 'B', ModItems.handle, 'C', ModItems.darkEnergyIngot});//OPSword
+		GameRegistry.addRecipe(new ItemStack(ModItems.Magnet), new Object[]{"C B","DAD","B C", 'A', ModItems.VIChip, 'B', Items.redstone, 'C', new ItemStack(Items.dye, 1, 4), 'D', ModItems.darkEnergyIngot});
 		//Blocks
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.darkEnergyIngot,  9), new ItemStack(ModBlocks.darkIronBlock));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.darkIronBlock), new Object[]{"AAA", "AAA", "AAA", 'A', ModItems.darkEnergyIngot});//Dark Iron Block

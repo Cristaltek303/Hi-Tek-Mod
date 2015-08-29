@@ -4,9 +4,13 @@ import org.lwjgl.opengl.GL11;
 
 import cristaltek.hitekmod.client.gui.button.CraftingTabletButton;
 import cristaltek.hitekmod.client.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.network.PacketHandler;
+import cristaltek.hitekmod.network.message.CraftingTabletMessage;
 import cristaltek.hitekmod.reference.Textures;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 public class GuiCraftingTablet extends GuiContainer {
@@ -15,8 +19,8 @@ public class GuiCraftingTablet extends GuiContainer {
 	private CraftingTabletButton spinButton;
 	private CraftingTabletButton clearButton;
 	
-	public GuiCraftingTablet(InventoryPlayer inventory, World world) {
-		super(new ContainerCraftingTablet(inventory, world));
+	public GuiCraftingTablet(Container container) {
+		super(container);
 		xSize = 220;
 		ySize = 193;
 	}
@@ -44,5 +48,25 @@ public class GuiCraftingTablet extends GuiContainer {
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton button) {
+		if (this.inventorySlots instanceof ContainerCraftingTablet) {
+			ContainerCraftingTablet container = (ContainerCraftingTablet)this.inventorySlots;
+			
+			if (button == balanceButton) {
+				container.balanceMatrix();
+				PacketHandler.INSTANCE.sendToServer(new CraftingTabletMessage(CraftingTabletMessage.BALANCE_MATRIX));
+			}
+			else if (button == spinButton) {
+				container.spinMatrix();
+				PacketHandler.INSTANCE.sendToServer(new CraftingTabletMessage(CraftingTabletMessage.SPIN_MATRIX));
+			}
+			else if (button == clearButton) {
+				container.clearMatrix();
+				PacketHandler.INSTANCE.sendToServer(new CraftingTabletMessage(CraftingTabletMessage.CLEAR_MATRIX));
+			}
+		}
 	}
 }

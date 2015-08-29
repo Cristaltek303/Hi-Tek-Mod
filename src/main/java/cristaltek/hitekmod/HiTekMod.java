@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
 import cristaltek.hitekmod.common.CommonProxy;
 import cristaltek.hitekmod.items.ModItems;
+import cristaltek.hitekmod.network.PacketHandler;
 import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -26,6 +27,7 @@ public class HiTekMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		PacketHandler.init();
 		ModItems.init();
 		ModBlocks.init();
 	}

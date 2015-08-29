@@ -10,6 +10,7 @@ import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -20,12 +21,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemTDTool extends ItemPickaxe {
-	
 	//Tool/Weapons Materials
 	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 0.0F, 35);
 	
 	private boolean silktouchMode;
-
+	
 	public ItemTDTool(String name) {
 		super(material);
 		setUnlocalizedName(name);
@@ -37,13 +37,12 @@ public class ItemTDTool extends ItemPickaxe {
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		canRepair = false;
-		
 	}
 	
 	//Fortune/Silk---------------------------------------------------
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, net.minecraft.entity.Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
-		if(itemstack.isItemEnchanted() == false){
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5) {
+		if(itemstack.isItemEnchanted() == false) {
 			itemstack.addEnchantment(Enchantment.fortune, 3);
 			silktouchMode = false;
 		}
@@ -67,21 +66,20 @@ public class ItemTDTool extends ItemPickaxe {
 		return itemstack;
 	}
 	
-	//---------------------------------------------------
-	
 	@Override
-	public Set<String> getToolClasses (ItemStack stack) {
+	public Set<String> getToolClasses(ItemStack stack) {
 		return ImmutableSet.of("pickaxe", "spade");
-    }
+	}
 	
 	//Block to Harvest--------------------------------------------------------------------------------
-	
+	@SuppressWarnings("rawtypes")
 	public static Set effectiveAgainst = Sets.newHashSet(new Block[] {
-	    Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, 
-	    Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, 
-	    Blocks.soul_sand, Blocks.mycelium, Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, 
-	    Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin});
-
+			Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, 
+			Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, 
+			Blocks.soul_sand, Blocks.mycelium, Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, 
+			Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin }
+	);
+	
 	@Override
 	public float func_150893_a(ItemStack stack, Block block) {
 		if (block.getMaterial() == Material.wood || block.getMaterial() == Material.vine || block.getMaterial() == Material.plants || block.getMaterial() == Material.leaves)
@@ -90,7 +88,6 @@ public class ItemTDTool extends ItemPickaxe {
 	}
 	
 	//Rightclick function------------------------------------------------------------------------------
-
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (player instanceof EntityPlayerMP)
@@ -102,10 +99,8 @@ public class ItemTDTool extends ItemPickaxe {
 		return true;
 	}
 	
-
 	@Override
-	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+	public boolean hasEffect(ItemStack itemstack, int pass) {
 		return false;
 	}
 }
-

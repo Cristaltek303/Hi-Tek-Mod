@@ -1,9 +1,7 @@
 package cristaltek.hitekmod.items;
 
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;
-import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -30,46 +28,28 @@ public class ItemhtArmor extends ItemArmor {
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		if (this.armorType == 2) {
-			return "ht:textures/models/armor/XLF-1 Armor_layer_2.png";
-		}
-		return "ht:textures/models/armor/XLF-1 Armor_layer_1.png";
+		return "ht:textures/models/armor/XLF-1 Armor_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 	
-	//Fly-Test----------------------------------------------------------------------------------------------------
-	
-	
-
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack)
-		{
-				if (player.getCurrentArmor(3)!=null && 
-					player.getCurrentArmor(2)!=null && 
-					player.getCurrentArmor(1)!=null && 
-					player.getCurrentArmor(0)!=null)
-				{
-					ItemStack helmet = player.getCurrentArmor(3);
-					ItemStack chestplate = player.getCurrentArmor(2);
-					ItemStack leggings = player.getCurrentArmor(1);
-					ItemStack boots = player.getCurrentArmor(0);
-					
-					if(helmet.getItem()==ModItems.htHelmet &&
-						chestplate.getItem()==ModItems.htChestplate &&
-						leggings.getItem()==ModItems.htLeggings &&
-						boots.getItem()==ModItems.htBoots)
-					{
-						player.capabilities.allowFlying = true;
-						player.capabilities.setFlySpeed(2.0F);
-						player.fallDistance = 0.0F;
-					}
-					else
-					{
-						
-
-						
-					}
-				}
-		}
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		ItemStack helmet = player.getCurrentArmor(3);
+		ItemStack chestplate = player.getCurrentArmor(2);
+		ItemStack leggings = player.getCurrentArmor(1);
+		ItemStack boots = player.getCurrentArmor(0);
 		
+		if (helmet != null && helmet.getItem() instanceof ItemhtArmor &&
+			chestplate != null && chestplate.getItem() instanceof ItemhtArmor &&
+			leggings != null && leggings.getItem() instanceof ItemhtArmor &&
+			boots != null && boots.getItem() instanceof ItemhtArmor) {
+			// Full HiTek Armor
+			player.capabilities.allowFlying = true;
+			player.capabilities.setFlySpeed(0.2F);
+		}
+		else {
+			player.capabilities.allowFlying = false;
+			player.capabilities.isFlying = false;
+			player.capabilities.setFlySpeed(0.05F);
+		}
+	}
 }
-

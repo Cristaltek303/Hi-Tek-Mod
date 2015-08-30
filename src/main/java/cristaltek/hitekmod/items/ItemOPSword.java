@@ -2,13 +2,8 @@ package cristaltek.hitekmod.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.HiTekMod;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemOPSword extends ItemSword {
@@ -26,6 +21,4 @@ public class ItemOPSword extends ItemSword {
 		setMaxStackSize(1);
 		canRepair = false;
 	}
-	
 }
-

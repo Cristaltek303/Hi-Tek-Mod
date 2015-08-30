@@ -2,33 +2,31 @@ package cristaltek.hitekmod.client.inventory;
 
 import java.util.ArrayList;
 
-import cristaltek.hitekmod.NBTHelper;
 import cristaltek.hitekmod.items.ItemCraftingTablet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class ContainerCraftingTablet extends Container {
 
 	private EntityPlayer player;
-	private World world;
 	
-	public InventoryCraftingTablet craftingMatrix;
+	public InventoryCrafting craftingMatrix;
 	public InventoryCraftResult craftingResult;
 	public InventoryTrash trash;
 	
-	public ContainerCraftingTablet(EntityPlayer player, InventoryCraftingTablet craftingTabletInventory) {
+	public ContainerCraftingTablet(EntityPlayer player) {
 		this.player = player;
-		this.world = player.worldObj;
 		
-		this.craftingMatrix = craftingTabletInventory;
-		this.craftingMatrix.setEventHandler(this);
+		this.craftingMatrix = new InventoryCrafting(this, 3, 3);
 		this.craftingResult = new InventoryCraftResult();
 		
 		this.trash = new InventoryTrash();
@@ -55,12 +53,12 @@ public class ContainerCraftingTablet extends Container {
 		
 		this.onCraftMatrixChanged(this.craftingMatrix);
 		
-//		this.readFromNBT(this.itemStack.getTagCompound());
+		readFromNBT(player.getHeldItem().getTagCompound());
 	}
 	
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		this.craftingResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftingMatrix, this.world));
+		this.craftingResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftingMatrix, this.player.worldObj));
 	}
 	
 	@Override
@@ -68,26 +66,23 @@ public class ContainerCraftingTablet extends Container {
 		super.onContainerClosed(player);
 		
 		if (!player.worldObj.isRemote) {
-/*			NBTTagCompound nbtTagCompound = this.itemStack.getTagCompound();
-			if (nbtTagCompound == null)
-				nbtTagCompound = new NBTTagCompound();
-			this.writeToNBT(nbtTagCompound);
-			this.itemStack.setTagCompound(nbtTagCompound);*/
-			this.craftingMatrix.onGuiSaved(player);
+			ItemStack craftingTablet = player.getHeldItem();
+			if (craftingTablet != null && craftingTablet.getItem() instanceof ItemCraftingTablet) {
+				craftingTablet.setTagCompound(writeToNBT(craftingTablet.getTagCompound()));
+			}
 		}
 	}
-
-    @Override
-    public ItemStack slotClick(int slotIndex, int par2, int par3, EntityPlayer entityPlayer) {
-        if (slotIndex >= 0 && slotIndex <= inventoryItemStacks.size()) {
-            ItemStack clickedStack = (ItemStack) inventoryItemStacks.get(slotIndex);
-            if (clickedStack != null && clickedStack.getItem() instanceof ItemCraftingTablet && NBTHelper.hasUUID(clickedStack) && NBTHelper.getUUID(clickedStack).equals(NBTHelper.getUUID(craftingMatrix.parent))) {
-                return null;
-            }
-        }
-
-        return super.slotClick(slotIndex, par2, par3, entityPlayer);
-    }
+	
+	@Override
+	public ItemStack slotClick(int slotIndex, int par2, int par3, EntityPlayer entityPlayer) {
+		if (slotIndex >= 0 && slotIndex <= inventoryItemStacks.size()) {
+			ItemStack clickedStack = (ItemStack)inventoryItemStacks.get(slotIndex);
+			if (clickedStack != null && clickedStack.getItem() instanceof ItemCraftingTablet && clickedStack.isItemEqual(entityPlayer.getHeldItem())) {
+				return null;
+			}
+		}
+		return super.slotClick(slotIndex, par2, par3, entityPlayer);
+	}
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
@@ -211,31 +206,37 @@ public class ContainerCraftingTablet extends Container {
         }
 	}
 	
-/*	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		if (nbtTagCompound != null) {
-		NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
-		
-		for (int i = 0; i < tagList.tagCount(); i++) {
-			NBTTagCompound stackTag = tagList.getCompoundTagAt(i);
-			byte slot = stackTag.getByte("Slot");
-			this.craftingMatrix.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
-		}
+			NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+			
+			for (int i = 0; i < tagList.tagCount(); i++) {
+				NBTTagCompound stackTag = tagList.getCompoundTagAt(i);
+				int slot = stackTag.getByte("Slot");
+				if (slot >= 0 && slot < this.craftingMatrix.getSizeInventory())
+					this.craftingMatrix.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
+			}
 		}
 	}
-	
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+
+	public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound) {
+		if (nbtTagCompound == null)
+			nbtTagCompound = new NBTTagCompound();
+		
 		NBTTagList tagList = new NBTTagList();
 		
 		for (int i = 0; i < this.craftingMatrix.getSizeInventory(); i++) {
 			ItemStack stack = this.craftingMatrix.getStackInSlot(i);
 			if (stack != null) {
-				NBTTagCompound stackTag = new NBTTagCompound();
-				stackTag.setByte("Slot", (byte)i);
-				stack.writeToNBT(stackTag);
-				tagList.appendTag(stackTag);
+				NBTTagCompound tagCompound = new NBTTagCompound();
+				tagCompound.setByte("Slot", (byte)i);
+				stack.writeToNBT(tagCompound);
+				tagList.appendTag(tagCompound);
 			}
 		}
 		
 		nbtTagCompound.setTag("Items", tagList);
-	}*/
+		
+		return nbtTagCompound;
+	}
 }

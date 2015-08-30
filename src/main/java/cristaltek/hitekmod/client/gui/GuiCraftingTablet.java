@@ -1,14 +1,7 @@
 package cristaltek.hitekmod.client.gui;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.lwjgl.opengl.GL11;
 
-import codechicken.nei.VisiblityData;
-import codechicken.nei.api.INEIGuiHandler;
-import codechicken.nei.api.TaggedInventoryArea;
-import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.client.gui.button.CraftingTabletButton;
@@ -19,11 +12,9 @@ import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
 
-//@Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 @SideOnly(Side.CLIENT)
-public class GuiCraftingTablet extends GuiContainer {// implements INEIGuiHandler {
+public class GuiCraftingTablet extends GuiContainer {
 
 	private CraftingTabletButton balanceButton;
 	private CraftingTabletButton spinButton;
@@ -79,30 +70,4 @@ public class GuiCraftingTablet extends GuiContainer {// implements INEIGuiHandle
 			}
 		}
 	}
-/*
-	@Override
-	public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
-		currentVisibility.showWidgets = true;
-		return currentVisibility;
-	}
-	
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack itemstack) {
-		return null;
-	}
-	
-	@Override
-	public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui) {
-		return Collections.emptyList();
-	}
-	
-	@Override
-	public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button) {
-		return false;
-	}
-	
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
-		return false;
-	}*/
 }

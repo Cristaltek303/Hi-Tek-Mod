@@ -22,4 +22,4 @@
 - [ ] Armor
 - [ ] TDTool
 - [ ] NEI Integration
-- [ ] Crafting Tablet
+- [x] Crafting Tablet

@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
 import cristaltek.hitekmod.common.CommonProxy;
+import cristaltek.hitekmod.handlers.GuiHandler;
 import cristaltek.hitekmod.items.ModItems;
 import cristaltek.hitekmod.network.PacketHandler;
 import cristaltek.hitekmod.reference.Reference;

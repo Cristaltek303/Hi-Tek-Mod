@@ -2,18 +2,16 @@ package cristaltek.hitekmod.client.inventory;
 
 import java.util.ArrayList;
 
+import cristaltek.hitekmod.NBTHelper;
+import cristaltek.hitekmod.items.ItemCraftingTablet;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 public class ContainerCraftingTablet extends Container {
@@ -78,6 +76,18 @@ public class ContainerCraftingTablet extends Container {
 			this.craftingMatrix.onGuiSaved(player);
 		}
 	}
+
+    @Override
+    public ItemStack slotClick(int slotIndex, int par2, int par3, EntityPlayer entityPlayer) {
+        if (slotIndex >= 0 && slotIndex <= inventoryItemStacks.size()) {
+            ItemStack clickedStack = (ItemStack) inventoryItemStacks.get(slotIndex);
+            if (clickedStack != null && clickedStack.getItem() instanceof ItemCraftingTablet && NBTHelper.hasUUID(clickedStack) && NBTHelper.getUUID(clickedStack).equals(NBTHelper.getUUID(craftingMatrix.parent))) {
+                return null;
+            }
+        }
+
+        return super.slotClick(slotIndex, par2, par3, entityPlayer);
+    }
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {

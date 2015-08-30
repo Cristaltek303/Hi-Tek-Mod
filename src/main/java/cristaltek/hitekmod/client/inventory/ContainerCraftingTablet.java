@@ -1,14 +1,7 @@
 package cristaltek.hitekmod.client.inventory;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import codechicken.nei.VisiblityData;
-import codechicken.nei.api.INEIGuiHandler;
-import codechicken.nei.api.TaggedInventoryArea;
-import cpw.mods.fml.common.Optional;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -19,47 +12,71 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-@Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
-public class ContainerCraftingTablet extends Container implements INEIGuiHandler {
+public class ContainerCraftingTablet extends Container {
 
 	private EntityPlayer player;
-	private World worldObj;
-
-	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
-	public IInventory craftResult = new InventoryCraftResult();
+	private World world;
 	
-	public ContainerCraftingTablet(InventoryPlayer inventory, World world) {
-		this.player = inventory.player;
-		this.worldObj = world;
+	public InventoryCraftingTablet craftingMatrix;
+	public InventoryCraftResult craftingResult;
+	public InventoryTrash trash;
+	
+	public ContainerCraftingTablet(EntityPlayer player, InventoryCraftingTablet craftingTabletInventory) {
+		this.player = player;
+		this.world = player.worldObj;
 		
-		this.addSlotToContainer(new SlotCrafting(inventory.player, this.craftMatrix, this.craftResult, 0, 166, 41));
+		this.craftingMatrix = craftingTabletInventory;
+		this.craftingMatrix.setEventHandler(this);
+		this.craftingResult = new InventoryCraftResult();
 		
-		int i, j;
+		this.trash = new InventoryTrash();
 		
-		for (i = 0; i < 3; ++i) {
-			for (j = 0; j < 3; ++j) {
-				this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 3, 59 + j * 22, 19 + i * 22));
+		this.addSlotToContainer(new SlotCrafting(player, this.craftingMatrix, this.craftingResult, 0, 166, 41));
+		
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				this.addSlotToContainer(new Slot(this.craftingMatrix, j + i * 3, 59 + j * 22, 19 + i * 22));
 			}
 		}
 		
-		for (i = 0; i < 3; ++i) {
-			for (j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 18 + j * 21, 98 + i * 21));
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 18 + j * 21, 98 + i * 21));
 			}
 		}
 		
-		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(inventory, i, 18 + i * 21, 165));
+		for (int i = 0; i < 9; ++i) {
+			this.addSlotToContainer(new Slot(player.inventory, i, 18 + i * 21, 165));
 		}
 		
-		this.onCraftMatrixChanged(this.craftMatrix);
+		this.addSlotToContainer(new Slot(this.trash, 0, 188, 19));
+		
+		this.onCraftMatrixChanged(this.craftingMatrix);
+		
+//		this.readFromNBT(this.itemStack.getTagCompound());
 	}
 	
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
+		this.craftingResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftingMatrix, this.world));
+	}
+	
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		
+		if (!player.worldObj.isRemote) {
+/*			NBTTagCompound nbtTagCompound = this.itemStack.getTagCompound();
+			if (nbtTagCompound == null)
+				nbtTagCompound = new NBTTagCompound();
+			this.writeToNBT(nbtTagCompound);
+			this.itemStack.setTagCompound(nbtTagCompound);*/
+			this.craftingMatrix.onGuiSaved(player);
+		}
 	}
 	
 	@Override
@@ -114,17 +131,17 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
 		return itemstack;
 	}
 	
-	@Override
+/*	@Override
 	public boolean func_94530_a(ItemStack itemstack, Slot slot) {
-		return slot.inventory != this.craftResult && super.func_94530_a(itemstack, slot);
-	}
+		return slot.inventory != this.craftingResult && super.func_94530_a(itemstack, slot);
+	}*/
 
 	public void balanceMatrix() {
         boolean[] balancedSlots = new boolean[9];
 
         // Go through all the slots, if the stack in the slots matches stacks in any other slots, split the total between all matching slots
         for (int i = 0; i < 9; i++) {
-            ItemStack currentStack = craftMatrix.getStackInSlot(i);
+            ItemStack currentStack = craftingMatrix.getStackInSlot(i);
             ArrayList<Integer> matchingSlotIndexes = new ArrayList<Integer>();
 
             // This stack has not been balanced yet
@@ -136,7 +153,7 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
                 // It is possible to balance this stack if other stacks are the same type, ignore previous currentStacks
                 for (int j = i + 1; j < 9; j++) {
                     // Now we find how many stacks are stackable with the current one
-                    ItemStack tStack = craftMatrix.getStackInSlot(j);
+                    ItemStack tStack = craftingMatrix.getStackInSlot(j);
 
                     if (tStack != null && currentStack != null && currentStack.getItem() == tStack.getItem()) {
                         matchingSlotIndexes.add(j);
@@ -150,9 +167,9 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
                 int remainingItemSize = totalItems % matchingStacks;
 
                 for (Integer index : matchingSlotIndexes) {
-                    craftMatrix.getStackInSlot(index).stackSize = balancedItemSize;
+                    craftingMatrix.getStackInSlot(index).stackSize = balancedItemSize;
                     if (remainingItemSize > 0) {
-                        craftMatrix.getStackInSlot(index).stackSize += 1;
+                        craftingMatrix.getStackInSlot(index).stackSize += 1;
                         remainingItemSize--;
                     }
                 }
@@ -165,7 +182,7 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
 	public void spinMatrix() {
         ArrayList<ItemStack> tempStacks = new ArrayList<ItemStack>(9);
         for (int i = 0; i < 9; i++) {
-            tempStacks.add(craftMatrix.getStackInSlot(i));
+            tempStacks.add(craftingMatrix.getStackInSlot(i));
         }
 
         int[] original = new int[]{0, 1, 2, 3, 5, 6, 7, 8};
@@ -174,7 +191,7 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
         rotated = new int[]{3, 0, 1, 6, 2, 7, 8, 5};
 
         for (int i = 0; i < original.length; i++) {
-            craftMatrix.setInventorySlotContents(original[i], tempStacks.get(rotated[i]));
+            craftingMatrix.setInventorySlotContents(original[i], tempStacks.get(rotated[i]));
         }
 	}
 
@@ -183,29 +200,32 @@ public class ContainerCraftingTablet extends Container implements INEIGuiHandler
             transferStackInSlot(player, i);
         }
 	}
-
-	@Override
-	public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
-		return currentVisibility;
+	
+/*	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		if (nbtTagCompound != null) {
+		NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+		
+		for (int i = 0; i < tagList.tagCount(); i++) {
+			NBTTagCompound stackTag = tagList.getCompoundTagAt(i);
+			byte slot = stackTag.getByte("Slot");
+			this.craftingMatrix.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
+		}
+		}
 	}
 	
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack itemstack) {
-		return null;
-	}
-	
-	@Override
-	public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui) {
-		return Collections.emptyList();
-	}
-	
-	@Override
-	public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button) {
-		return false;
-	}
-	
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
-		return false;
-	}
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		NBTTagList tagList = new NBTTagList();
+		
+		for (int i = 0; i < this.craftingMatrix.getSizeInventory(); i++) {
+			ItemStack stack = this.craftingMatrix.getStackInSlot(i);
+			if (stack != null) {
+				NBTTagCompound stackTag = new NBTTagCompound();
+				stackTag.setByte("Slot", (byte)i);
+				stack.writeToNBT(stackTag);
+				tagList.appendTag(stackTag);
+			}
+		}
+		
+		nbtTagCompound.setTag("Items", tagList);
+	}*/
 }

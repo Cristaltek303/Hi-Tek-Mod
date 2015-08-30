@@ -18,8 +18,9 @@ item.htBoots.name=XLF-1 Boots
 
 
 item.temporalDecompositionTool.name=Temporal Decomposing Tool
-item.OPSword.name=Filetierer
+item.OPSword.name=Molecular Defragmenter
 item.CraftingTablet.name=Crafting Tablet
+item.Magnet.name=Adhesion Enforcer
 
 tile.darkstarBlock.name=Darkstar Block
 tile.darkIronBlock.name=Dark Iron Block

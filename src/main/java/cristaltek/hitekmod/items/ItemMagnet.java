@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
+import cristaltek.hitekmod.configs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -21,7 +22,7 @@ public class ItemMagnet extends ItemBase{
 	{
 		super(name);
 		setMaxStackSize(1);
-		this.distanceFromPlayer = 10;
+		this.distanceFromPlayer = configs.magnet_strength;
 		canRepair = false;
 		setMaxDamage(0);
 		

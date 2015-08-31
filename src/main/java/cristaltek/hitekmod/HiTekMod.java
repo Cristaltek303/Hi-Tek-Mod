@@ -16,6 +16,7 @@ import cristaltek.hitekmod.network.PacketHandler;
 import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
 public class HiTekMod {
@@ -28,6 +29,7 @@ public class HiTekMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		configs.init(new Configuration(event.getSuggestedConfigurationFile()));
 		PacketHandler.init();
 		ModItems.init();
 		ModBlocks.init();

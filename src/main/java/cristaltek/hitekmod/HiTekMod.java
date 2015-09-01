@@ -29,7 +29,7 @@ public class HiTekMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		configs.init(new Configuration(event.getSuggestedConfigurationFile()));
+		Configs.init(new Configuration(event.getSuggestedConfigurationFile()));
 		PacketHandler.init();
 		ModItems.init();
 		ModBlocks.init();

@@ -11,6 +11,8 @@ public class Configs {
 	
 	public static int magnet_strength;
 	
+	public static int htArmor_maxEnergy;
+	
 	public static void init(Configuration configuration) {
 		config = configuration;
 		config.load();
@@ -23,5 +25,7 @@ public class Configs {
 //		TDTool_maxEnergy = config.getInt("maxEnergy", "TDTool", 1000, 100, 10000, "The maximum amount of energy that the TDTool can hold");
 		
 		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "How far the magnet can reach");
+		
+		htArmor_maxEnergy = config.getInt("maxEnergy", "htArmor", 10000, 1000, 100000, "The maximum amount of energy that the XLF-1 armor can hold");
 	}
 }

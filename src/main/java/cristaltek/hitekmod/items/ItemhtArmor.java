@@ -1,15 +1,22 @@
 package cristaltek.hitekmod.items;
 
+import java.util.List;
+
+import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import cristaltek.hitekmod.Configs;
 import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class ItemhtArmor extends ItemArmor {
+public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	//Armor Material
 	public static final ArmorMaterial material = EnumHelper.addArmorMaterial("htArmorMaterial", -1, new int[]{3,8,6,3}, 35);
 	
@@ -32,6 +39,23 @@ public class ItemhtArmor extends ItemArmor {
 	}
 	
 	@Override
+	public double getDurabilityForDisplay(ItemStack stack) {
+		return 1.0 - (double)this.getEnergyStored(stack) / (double)this.getMaxEnergyStored(stack);
+	}
+	
+	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		return this.getEnergyStored(stack) < this.getMaxEnergyStored(stack);
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean debug) {
+		info.add(this.getEnergyStored(stack) + " / " + this.getMaxEnergyStored(stack) + " RF");
+	}
+	
+	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		ItemStack helmet = player.getCurrentArmor(3);
 		ItemStack chestplate = player.getCurrentArmor(2);
@@ -45,11 +69,52 @@ public class ItemhtArmor extends ItemArmor {
 			// Full HiTek Armor
 			player.capabilities.allowFlying = true;
 			player.capabilities.setFlySpeed(0.2F);
+			
 		}
 		else {
 			player.capabilities.allowFlying = false;
 			player.capabilities.isFlying = false;
 			player.capabilities.setFlySpeed(0.05F);
 		}
+	}
+	
+	@Override
+	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
+		int energy = container.stackTagCompound.getInteger("Energy");
+		int energyExtracted = Math.min(energy, maxExtract);
+		
+		if (!simulate) {
+			energy -= energyExtracted;
+			container.stackTagCompound.setInteger("Energy", energy);
+		}
+		return energyExtracted;
+	}
+	
+	@Override
+	public int getEnergyStored(ItemStack container) {
+		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy"))
+			return 0;
+		
+		return container.stackTagCompound.getInteger("Energy");
+	}
+	
+	@Override
+	public int getMaxEnergyStored(ItemStack container) {
+		return Configs.htArmor_maxEnergy;
+	}
+	
+	@Override
+	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
+		if (container.stackTagCompound == null)
+			container.stackTagCompound = new NBTTagCompound();
+		
+		int energy = container.stackTagCompound.getInteger("Energy");
+		int energyReceived = Math.min(Configs.htArmor_maxEnergy - energy, maxReceive);
+		
+		if (!simulate) {
+			energy += energyReceived;
+			container.stackTagCompound.setInteger("Energy", energy);
+		}
+		return energyReceived;
 	}
 }

@@ -1,5 +1,6 @@
 package cristaltek.hitekmod.items;
 
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
@@ -10,6 +11,7 @@ import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -23,8 +25,6 @@ import net.minecraftforge.common.util.EnumHelper;
 public class ItemTDTool extends ItemPickaxe {
 	//Tool/Weapons Materials
 	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 0.0F, 35);
-	
-	private boolean silktouchMode;
 	
 	public ItemTDTool(String name) {
 		super(material);
@@ -44,17 +44,19 @@ public class ItemTDTool extends ItemPickaxe {
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5) {
 		if(itemstack.isItemEnchanted() == false) {
 			itemstack.addEnchantment(Enchantment.fortune, 3);
-			silktouchMode = false;
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
 		if (!world.isRemote && player.isSneaking()) {
-			itemstack.getEnchantmentTagList().removeTag(0);
-			silktouchMode = !silktouchMode;
+			Map enchantments = EnchantmentHelper.getEnchantments(itemstack);
+			boolean isFortune = enchantments.containsKey(Enchantment.fortune.effectId);
+			enchantments.clear();
+			EnchantmentHelper.setEnchantments(enchantments, itemstack);
 			
-			if (silktouchMode) {
+			if (isFortune) {
 				itemstack.addEnchantment(Enchantment.silkTouch, 1);
 				player.addChatMessage(new ChatComponentText("Silk-Touch-Mode enabled"));
 			}

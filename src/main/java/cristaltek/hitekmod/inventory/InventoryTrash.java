@@ -1,4 +1,4 @@
-package cristaltek.hitekmod.client.inventory;
+package cristaltek.hitekmod.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

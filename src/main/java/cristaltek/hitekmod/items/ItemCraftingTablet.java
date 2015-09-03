@@ -1,6 +1,7 @@
 package cristaltek.hitekmod.items;
 
 import cristaltek.hitekmod.HiTekMod;
+import cristaltek.hitekmod.handlers.GuiHandler.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -23,7 +24,7 @@ public class ItemCraftingTablet extends ItemBase {
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (!world.isRemote)
-			player.openGui(HiTekMod.instance, 0, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(HiTekMod.instance, Gui.CRAFTING_TABLET.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		
 		return item;
 	}

@@ -4,7 +4,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cristaltek.hitekmod.client.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
 import io.netty.buffer.ByteBuf;
 
 public class CraftingTabletMessage implements IMessage {

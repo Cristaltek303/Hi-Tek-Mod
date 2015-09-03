@@ -1,4 +1,4 @@
-package cristaltek.hitekmod.client.inventory;
+package cristaltek.hitekmod.inventory;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class ContainerCraftingTablet extends Container {
+public class ContainerCraftingTablet extends ContainerBase {
 
 	private EntityPlayer player;
 	
@@ -39,15 +39,7 @@ public class ContainerCraftingTablet extends Container {
 			}
 		}
 		
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 18 + j * 21, 98 + i * 21));
-			}
-		}
-		
-		for (int i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(player.inventory, i, 18 + i * 21, 165));
-		}
+		this.addPlayerInventorySlots(player.inventory);
 		
 		this.addSlotToContainer(new Slot(this.trash, 0, 188, 19));
 		
@@ -85,12 +77,8 @@ public class ContainerCraftingTablet extends Container {
 	}
 	
 	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return true;
-	}
-	
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotId)
+	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotId);
 		
@@ -135,11 +123,6 @@ public class ContainerCraftingTablet extends Container {
 		
 		return itemstack;
 	}
-	
-/*	@Override
-	public boolean func_94530_a(ItemStack itemstack, Slot slot) {
-		return slot.inventory != this.craftingResult && super.func_94530_a(itemstack, slot);
-	}*/
 
 	public void balanceMatrix() {
         boolean[] balancedSlots = new boolean[9];

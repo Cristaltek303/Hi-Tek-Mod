@@ -5,12 +5,13 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.client.gui.button.CraftingTabletButton;
-import cristaltek.hitekmod.client.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
 import cristaltek.hitekmod.network.PacketHandler;
 import cristaltek.hitekmod.network.message.CraftingTabletMessage;
 import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 
 @SideOnly(Side.CLIENT)
@@ -20,8 +21,8 @@ public class GuiCraftingTablet extends GuiContainer {
 	private CraftingTabletButton spinButton;
 	private CraftingTabletButton clearButton;
 	
-	public GuiCraftingTablet(Container container) {
-		super(container);
+	public GuiCraftingTablet(EntityPlayer player) {
+		super(new ContainerCraftingTablet(player));
 		xSize = 220;
 		ySize = 193;
 	}

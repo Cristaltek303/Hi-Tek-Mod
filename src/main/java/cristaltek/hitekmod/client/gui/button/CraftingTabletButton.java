@@ -5,15 +5,12 @@ import org.lwjgl.opengl.GL11;
 import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ResourceLocation;
 
 public class CraftingTabletButton extends GuiButton {
 
 	public static final int SPIN = 0;
 	public static final int BALANCE = 1;
 	public static final int EMPTY = 2;
-	
-	public static final ResourceLocation widgetTextures = Textures.Gui.WIDGETS;
 	
 	private int iconOffsetX = 0;
 	private int iconOffsetY = 0;
@@ -23,22 +20,22 @@ public class CraftingTabletButton extends GuiButton {
 		
 		if (type == SPIN) {
 			iconOffsetX = 0;
-			iconOffsetY = 16;
+			iconOffsetY = 211;
 		}
 		else if (type == BALANCE) {
 			iconOffsetX = 0;
-			iconOffsetY = 32;
+			iconOffsetY = 227;
 		}
 		else if (type == EMPTY) {
 			iconOffsetX = 0;
-			iconOffsetY = 0;
+			iconOffsetY = 195;
 		}
 	}
 	
 	@Override
 	public void drawButton(Minecraft minecraft, int mPosX, int mPosY) {
 		if (this.visible) {
-			minecraft.getTextureManager().bindTexture(widgetTextures);
+			minecraft.getTextureManager().bindTexture(Textures.Gui.CRAFTING_TABLET);
 			
 			boolean hover = mPosX >= this.xPosition && mPosY >= this.yPosition && mPosX < this.xPosition + this.width && mPosY < this.yPosition + this.height;
 			int h = getHoverState(hover);

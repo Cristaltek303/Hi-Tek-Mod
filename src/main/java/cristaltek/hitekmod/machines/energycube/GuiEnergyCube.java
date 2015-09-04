@@ -7,8 +7,6 @@ import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 
-//TODO Add Slot for armor
-
 public class GuiEnergyCube extends GuiContainer
 {
 	private TileEntityEnergyCube energyCube;

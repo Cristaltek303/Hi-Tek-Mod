@@ -41,14 +41,14 @@ public class ContainerBase extends Container
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			
-			if (slotId >= 0 && slotId < 36)
+			if (slotId >= 0 && slotId < 27)
 			{
-				if (!this.mergeItemStack(itemstack1, 36, this.inventorySlots.size(), false))
+				if (!this.mergeItemStack(itemstack1, 27, 36, false))
 					return null;
 			}
 			else
 			{
-				if (!this.mergeItemStack(itemstack1, 0, 36, false))
+				if (!this.mergeItemStack(itemstack1, 0, 27, false))
 					return null;
 			}
 			

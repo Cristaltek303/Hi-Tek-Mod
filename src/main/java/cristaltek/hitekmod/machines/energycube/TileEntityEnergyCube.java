@@ -16,6 +16,8 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 
 	private EnergyStorage energyStorage;
 	private ItemStack[] inventory = new ItemStack[2];
+	private int receiveEnergySlot = 1000000;
+	private int extractEnergySlot = 1000000;
 	
 	public TileEntityEnergyCube()
 	{
@@ -31,7 +33,7 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 			if (inventory[0] != null && inventory[0].getItem() instanceof IEnergyContainerItem)
 			{
 				IEnergyContainerItem input = (IEnergyContainerItem)inventory[0].getItem();
-				int energyToStore = input.extractEnergy(inventory[0], 10, true);
+				int energyToStore = input.extractEnergy(inventory[0], receiveEnergySlot, true);
 				int energyStored = this.energyStorage.receiveEnergy(energyToStore, false);
 				input.extractEnergy(inventory[0], energyStored, false);
 			}
@@ -40,7 +42,7 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 			if (inventory[1] != null && inventory[1].getItem() instanceof IEnergyContainerItem)
 			{
 				IEnergyContainerItem output = (IEnergyContainerItem)inventory[1].getItem();
-				int energyToExtract = this.energyStorage.extractEnergy(10, true);
+				int energyToExtract = this.energyStorage.extractEnergy(extractEnergySlot, true);
 				int energyExtracted = output.receiveEnergy(inventory[1], energyToExtract, false);
 				this.energyStorage.extractEnergy(energyExtracted, false);
 			}

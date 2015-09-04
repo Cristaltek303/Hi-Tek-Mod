@@ -26,6 +26,6 @@ public class Configs {
 		
 		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "How far the magnet can reach");
 		
-		htArmor_maxEnergy = config.getInt("maxEnergy", "htArmor", 10000, 1000, 100000, "The maximum amount of energy that the XLF-1 armor can hold");
+		htArmor_maxEnergy = config.getInt("maxEnergy", "htArmor", 1000000, 1000, 10000000, "The maximum amount of energy that the XLF-1 armor can hold");
 	}
 }

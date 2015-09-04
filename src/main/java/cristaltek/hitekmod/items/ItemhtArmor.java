@@ -68,7 +68,7 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 			boots != null && boots.getItem() instanceof ItemhtArmor) {
 			// Full HiTek Armor
 			player.capabilities.allowFlying = true;
-			player.capabilities.setFlySpeed(0.2F);
+			player.capabilities.setFlySpeed(0.1F);
 			
 		}
 		else {

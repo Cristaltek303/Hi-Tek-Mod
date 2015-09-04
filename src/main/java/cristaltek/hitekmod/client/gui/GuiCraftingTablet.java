@@ -12,7 +12,6 @@ import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 
 @SideOnly(Side.CLIENT)
 public class GuiCraftingTablet extends GuiContainer {

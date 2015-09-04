@@ -3,7 +3,6 @@ package cristaltek.hitekmod.machines.energycube;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -20,6 +19,31 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 	public TileEntityEnergyCube()
 	{
 		energyStorage = new EnergyStorage(10000000);
+	}
+	
+	@Override
+	public void updateEntity()
+	{
+		if (!worldObj.isRemote)
+		{
+			// Energy input
+			if (inventory[0] != null && inventory[0].getItem() instanceof IEnergyContainerItem)
+			{
+				IEnergyContainerItem input = (IEnergyContainerItem)inventory[0].getItem();
+				int energyToStore = input.extractEnergy(inventory[0], 10, true);
+				int energyStored = this.energyStorage.receiveEnergy(energyToStore, false);
+				input.extractEnergy(inventory[0], energyStored, false);
+			}
+			
+			// Energy output
+			if (inventory[1] != null && inventory[1].getItem() instanceof IEnergyContainerItem)
+			{
+				IEnergyContainerItem output = (IEnergyContainerItem)inventory[1].getItem();
+				int energyToExtract = this.energyStorage.extractEnergy(10, true);
+				int energyExtracted = output.receiveEnergy(inventory[1], energyToExtract, false);
+				this.energyStorage.extractEnergy(energyExtracted, false);
+			}
+		}
 	}
 	
 	@Override
@@ -179,13 +203,26 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		energyStorage.writeToNBT(tag);
+		this.energyStorage.writeToNBT(tag);
+
+		NBTTagCompound inputSlot = new NBTTagCompound();
+		if (this.inventory[0] != null)
+			this.inventory[0].writeToNBT(inputSlot);
+		tag.setTag("inputSlot", inputSlot);
+
+		NBTTagCompound outputSlot = new NBTTagCompound();
+		if (this.inventory[1] != null)
+			this.inventory[1].writeToNBT(outputSlot);
+		tag.setTag("outputSlot", outputSlot);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		energyStorage.readFromNBT(tag);
+		this.energyStorage.readFromNBT(tag);
+		
+		this.inventory[0] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("inputSlot"));
+		this.inventory[1] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("outputSlot"));
 	}
 }

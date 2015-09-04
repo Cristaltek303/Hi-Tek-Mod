@@ -21,6 +21,7 @@ public class ContainerEnergyCube extends ContainerBase
 		this.addSlotToContainer(new Slot(energyCube, 0, 40, 41));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void detectAndSendChanges()
 	{

@@ -3,13 +3,9 @@ package cristaltek.hitekmod.machines.energycube;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-
 
 //TODO Add Slot for armor
 

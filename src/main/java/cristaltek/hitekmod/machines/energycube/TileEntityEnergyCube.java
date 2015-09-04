@@ -3,6 +3,7 @@ package cristaltek.hitekmod.machines.energycube;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,26 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 				int energyToExtract = this.energyStorage.extractEnergy(10, true);
 				int energyExtracted = output.receiveEnergy(inventory[1], energyToExtract, false);
 				this.energyStorage.extractEnergy(energyExtracted, false);
+			}
+			
+			// Block energy
+			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+			{
+				int targetX = this.xCoord + dir.offsetX;
+				int targetY = this.yCoord + dir.offsetY;
+				int targetZ = this.zCoord + dir.offsetZ;
+				
+				TileEntity tileEntity = worldObj.getTileEntity(targetX, targetY, targetZ);
+				if (tileEntity instanceof IEnergyReceiver && !(tileEntity instanceof TileEntityEnergyCube))
+				{
+					IEnergyReceiver energyReceiver = (IEnergyReceiver)tileEntity;
+					if (energyReceiver.canConnectEnergy(dir.getOpposite()))
+					{
+						int energyToSend = this.energyStorage.extractEnergy(10, true);
+						int energySent = energyReceiver.receiveEnergy(dir.getOpposite(), energyToSend, false);
+						this.energyStorage.extractEnergy(energySent, false);
+					}
+				}
 			}
 		}
 	}

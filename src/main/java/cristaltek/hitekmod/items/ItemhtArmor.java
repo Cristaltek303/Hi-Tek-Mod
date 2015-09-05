@@ -80,6 +80,9 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
+		if (container.stackTagCompound == null)
+			container.stackTagCompound = new NBTTagCompound();
+		
 		int energy = container.stackTagCompound.getInteger("Energy");
 		int energyExtracted = Math.min(energy, maxExtract);
 		

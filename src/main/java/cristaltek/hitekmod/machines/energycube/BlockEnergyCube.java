@@ -17,7 +17,7 @@ public class BlockEnergyCube extends BlockBase implements ITileEntityProvider
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconTop;
-
+	
 	public BlockEnergyCube()
 	{
 		super(Material.iron, "energyCube");

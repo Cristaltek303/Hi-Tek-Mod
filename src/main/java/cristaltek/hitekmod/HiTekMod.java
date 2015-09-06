@@ -19,7 +19,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
-public class HiTekMod {
+public class HiTekMod
+{
 
 	@Instance(Reference.MOD_ID)
 	public static HiTekMod instance;
@@ -28,7 +29,8 @@ public class HiTekMod {
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event)
+	{
 		Configs.init(new Configuration(event.getSuggestedConfigurationFile()));
 		PacketHandler.init();
 		ModItems.init();
@@ -36,7 +38,8 @@ public class HiTekMod {
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent event)
+	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(HiTekMod.instance, new GuiHandler());
 		
 		Recipes.init();
@@ -45,12 +48,15 @@ public class HiTekMod {
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		
 	}
 	
 	public static CreativeTabs tabHiTekMod = new CreativeTabs(Reference.MOD_NAME) {
 		@Override
-		public Item getTabIconItem() {
+		public Item getTabIconItem()
+		{
 			return ModItems.darkstar;
 		}
 	};

@@ -4,66 +4,84 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventoryTrash implements IInventory {
+public class InventoryTrash implements IInventory
+{
 
 	@Override
-	public int getSizeInventory() {
+	public int getSizeInventory()
+	{
 		return 1;
 	}
 	
 	@Override
-	public ItemStack getStackInSlot(int index) {
+	public ItemStack getStackInSlot(int index)
+	{
 		return null;
 	}
 	
 	@Override
-	public ItemStack decrStackSize(int index, int amount) {
+	public ItemStack decrStackSize(int index, int amount)
+	{
 		return null;
 	}
 	
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index) {
+	public ItemStack getStackInSlotOnClosing(int index)
+	{
 		return null;
 	}
 	
 	@Override
-	public void setInventorySlotContents(int index, ItemStack itemstack) {
+	public void setInventorySlotContents(int index, ItemStack itemstack)
+	{
+	
 	}
 	
 	@Override
-	public String getInventoryName() {
+	public String getInventoryName()
+	{
 		return null;
 	}
 	
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomInventoryName()
+	{
 		return false;
 	}
 	
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit()
+	{
 		return 64;
 	}
 	
 	@Override
-	public void markDirty() {
+	public void markDirty()
+	{
+		
 	}
 	
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUseableByPlayer(EntityPlayer player)
+	{
 		return true;
 	}
 	
 	@Override
-	public void openInventory() {
+	public void openInventory()
+	{
+		
 	}
 	
 	@Override
-	public void closeInventory() {
+	public void closeInventory()
+	{
+		
 	}
 	
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack) {
+	public boolean isItemValidForSlot(int index, ItemStack itemstack)
+	{
 		return true;
 	}
 }

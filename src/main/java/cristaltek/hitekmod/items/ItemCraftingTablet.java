@@ -6,9 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemCraftingTablet extends ItemBase {
+public class ItemCraftingTablet extends ItemBase
+{
 
-	public ItemCraftingTablet(String name) {
+	public ItemCraftingTablet(String name)
+	{
 		super(name);
 		
 		//characteristics
@@ -17,12 +19,14 @@ public class ItemCraftingTablet extends ItemBase {
 	}
 	
 	@Override
-	public boolean getShareTag() {
+	public boolean getShareTag()
+	{
 		return true;
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player)
+	{
 		if (!world.isRemote)
 			player.openGui(HiTekMod.instance, Gui.CRAFTING_TABLET.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		

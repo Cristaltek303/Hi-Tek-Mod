@@ -2,7 +2,8 @@ package cristaltek.hitekmod.items;
 
 import net.minecraft.item.Item;
 
-public class ModItems {
+public class ModItems
+{
 	//Items
 	public static Item darkstar;
 	public static Item concentratedDarkstar;
@@ -31,7 +32,8 @@ public class ModItems {
 	public static Item htLeggings; //WIP
 	public static Item htBoots; //WIP
 
-	public static void init() {
+	public static void init()
+	{
 		//Items
 		darkstar = new ItemBase("darkstar");
 		concentratedDarkstar = new ItemBase("concentratedDarkstar");

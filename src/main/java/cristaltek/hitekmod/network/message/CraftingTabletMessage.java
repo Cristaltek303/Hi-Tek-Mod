@@ -7,7 +7,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
 import io.netty.buffer.ByteBuf;
 
-public class CraftingTabletMessage implements IMessage {
+public class CraftingTabletMessage implements IMessage
+{
 
 	int action;
 	
@@ -16,29 +17,37 @@ public class CraftingTabletMessage implements IMessage {
 	public static final int BALANCE_MATRIX = 3;
 //	public static final int OPEN_IBENCH = 4;
 	
-	public CraftingTabletMessage() {
+	public CraftingTabletMessage()
+	{
+		
 	}
 	
-	public CraftingTabletMessage(int action) {
+	public CraftingTabletMessage(int action)
+	{
 		this.action = action;
 	}
 	
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes(ByteBuf buf)
+	{
 		action = ByteBufUtils.readVarShort(buf);
 	}
 	
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes(ByteBuf buf)
+	{
 		ByteBufUtils.writeVarShort(buf, action);
 	}
 
-	public static class Handler implements IMessageHandler<CraftingTabletMessage, IMessage> {
+	public static class Handler implements IMessageHandler<CraftingTabletMessage, IMessage>
+	{
 
 		@Override
-		public IMessage onMessage(CraftingTabletMessage message, MessageContext ctx) {
+		public IMessage onMessage(CraftingTabletMessage message, MessageContext ctx)
+		{
 			ContainerCraftingTablet container;
-			switch (message.action) {
+			switch (message.action)
+			{
 				case CraftingTabletMessage.BALANCE_MATRIX:
 					container = (ContainerCraftingTablet)ctx.getServerHandler().playerEntity.openContainer;
 					container.balanceMatrix();

@@ -8,10 +8,12 @@ import cristaltek.hitekmod.items.rendering.ItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 @SideOnly(Side.CLIENT)
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends CommonProxy
+{
 
 	@Override
-	public void registerRenderInformation() {
+	public void registerRenderInformation()
+	{
 		ItemRenderer itemRenderer = new ItemRenderer();
 		
 		MinecraftForgeClient.registerItemRenderer(ModItems.OPSword, itemRenderer);

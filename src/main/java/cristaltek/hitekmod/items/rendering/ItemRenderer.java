@@ -13,20 +13,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
-public class ItemRenderer implements IItemRenderer {
+public class ItemRenderer implements IItemRenderer
+{
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return (type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON);
 	}
 	
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return false;
 	}
 	
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack itemStack, Object... data) {
+	public void renderItem(ItemRenderType type, ItemStack itemStack, Object... data)
+	{
 		EntityLivingBase entityLivingBase = (EntityLivingBase)data[1];
 		
 		GL11.glPushMatrix();

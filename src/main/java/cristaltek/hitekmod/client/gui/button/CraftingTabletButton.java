@@ -6,7 +6,8 @@ import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
-public class CraftingTabletButton extends GuiButton {
+public class CraftingTabletButton extends GuiButton
+{
 
 	public static final int SPIN = 0;
 	public static final int BALANCE = 1;
@@ -15,26 +16,32 @@ public class CraftingTabletButton extends GuiButton {
 	private int iconOffsetX = 0;
 	private int iconOffsetY = 0;
 	
-	public CraftingTabletButton(int id, int xPos, int yPos, int width, int height, int type) {
+	public CraftingTabletButton(int id, int xPos, int yPos, int width, int height, int type)
+	{
 		super(id, xPos, yPos, width, height, "");
 		
-		if (type == SPIN) {
+		if (type == SPIN)
+		{
 			iconOffsetX = 0;
 			iconOffsetY = 211;
 		}
-		else if (type == BALANCE) {
+		else if (type == BALANCE)
+		{
 			iconOffsetX = 0;
 			iconOffsetY = 227;
 		}
-		else if (type == EMPTY) {
+		else if (type == EMPTY)
+		{
 			iconOffsetX = 0;
 			iconOffsetY = 195;
 		}
 	}
 	
 	@Override
-	public void drawButton(Minecraft minecraft, int mPosX, int mPosY) {
-		if (this.visible) {
+	public void drawButton(Minecraft minecraft, int mPosX, int mPosY)
+	{
+		if (this.visible)
+		{
 			minecraft.getTextureManager().bindTexture(Textures.Gui.CRAFTING_TABLET);
 			
 			boolean hover = mPosX >= this.xPosition && mPosY >= this.yPosition && mPosX < this.xPosition + this.width && mPosY < this.yPosition + this.height;

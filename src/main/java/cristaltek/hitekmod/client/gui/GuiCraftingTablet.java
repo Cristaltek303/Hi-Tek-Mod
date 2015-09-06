@@ -14,13 +14,15 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 
 @SideOnly(Side.CLIENT)
-public class GuiCraftingTablet extends GuiContainer {
+public class GuiCraftingTablet extends GuiContainer
+{
 
 	private CraftingTabletButton balanceButton;
 	private CraftingTabletButton spinButton;
 	private CraftingTabletButton clearButton;
 	
-	public GuiCraftingTablet(EntityPlayer player) {
+	public GuiCraftingTablet(EntityPlayer player)
+	{
 		super(new ContainerCraftingTablet(player));
 		xSize = 220;
 		ySize = 193;
@@ -28,7 +30,8 @@ public class GuiCraftingTablet extends GuiContainer {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		
 		int xStart = ((width - xSize) / 2);
@@ -40,7 +43,8 @@ public class GuiCraftingTablet extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float ticks, int x, int y) {
+	protected void drawGuiContainerBackgroundLayer(float ticks, int x, int y)
+	{
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.9F); //Alpha = Transparent
@@ -52,8 +56,10 @@ public class GuiCraftingTablet extends GuiContainer {
 	}
 	
 	@Override
-	protected void actionPerformed(GuiButton button) {
-		if (this.inventorySlots instanceof ContainerCraftingTablet) {
+	protected void actionPerformed(GuiButton button)
+	{
+		if (this.inventorySlots instanceof ContainerCraftingTablet)
+		{
 			ContainerCraftingTablet container = (ContainerCraftingTablet)this.inventorySlots;
 			
 			if (button == balanceButton) {

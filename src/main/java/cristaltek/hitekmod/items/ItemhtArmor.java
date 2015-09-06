@@ -16,11 +16,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
+public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem
+{
 	//Armor Material
 	public static final ArmorMaterial material = EnumHelper.addArmorMaterial("htArmorMaterial", -1, new int[]{3,8,6,3}, 35);
 	
-	public ItemhtArmor(String name, int type) {
+	public ItemhtArmor(String name, int type)
+	{
 		super(material, 0, type);
 		setUnlocalizedName(name);
 		setTextureName("ht:" + name);
@@ -34,12 +36,14 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	}
 	
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
 		return "ht:textures/models/armor/XLF-1 Armor_layer_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 	
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
+	public double getDurabilityForDisplay(ItemStack stack)
+	{
 		return 1.0 - (double)this.getEnergyStored(stack) / (double)this.getMaxEnergyStored(stack);
 	}
 	
@@ -51,12 +55,14 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean debug) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean debug)
+	{
 		info.add(this.getEnergyStored(stack) + " / " + this.getMaxEnergyStored(stack) + " RF");
 	}
 	
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack)
+	{
 		ItemStack helmet = player.getCurrentArmor(3);
 		ItemStack chestplate = player.getCurrentArmor(2);
 		ItemStack leggings = player.getCurrentArmor(1);
@@ -65,13 +71,15 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 		if (helmet != null && helmet.getItem() instanceof ItemhtArmor &&
 			chestplate != null && chestplate.getItem() instanceof ItemhtArmor &&
 			leggings != null && leggings.getItem() instanceof ItemhtArmor &&
-			boots != null && boots.getItem() instanceof ItemhtArmor) {
+			boots != null && boots.getItem() instanceof ItemhtArmor) 
+		{
 			// Full HiTek Armor
 			player.capabilities.allowFlying = true;
 			player.capabilities.setFlySpeed(0.1F);
 			
 		}
-		else {
+		else 
+		{
 			player.capabilities.allowFlying = false;
 			player.capabilities.isFlying = false;
 			player.capabilities.setFlySpeed(0.05F);
@@ -79,7 +87,8 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	}
 	
 	@Override
-	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
+	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate)
+	{
 		if (container.stackTagCompound == null)
 			container.stackTagCompound = new NBTTagCompound();
 		
@@ -94,7 +103,8 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	}
 	
 	@Override
-	public int getEnergyStored(ItemStack container) {
+	public int getEnergyStored(ItemStack container)
+	{
 		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy"))
 			return 0;
 		
@@ -102,19 +112,22 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem {
 	}
 	
 	@Override
-	public int getMaxEnergyStored(ItemStack container) {
+	public int getMaxEnergyStored(ItemStack container)
+	{
 		return Configs.htArmor_maxEnergy;
 	}
 	
 	@Override
-	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
+	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate)
+	{
 		if (container.stackTagCompound == null)
 			container.stackTagCompound = new NBTTagCompound();
 		
 		int energy = container.stackTagCompound.getInteger("Energy");
 		int energyReceived = Math.min(Configs.htArmor_maxEnergy - energy, maxReceive);
 		
-		if (!simulate) {
+		if (!simulate)
+		{
 			energy += energyReceived;
 			container.stackTagCompound.setInteger("Energy", energy);
 		}

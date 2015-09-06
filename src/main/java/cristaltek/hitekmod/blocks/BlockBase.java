@@ -6,9 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 
-public class BlockBase extends Block {
+public class BlockBase extends Block
+{
 
-	protected BlockBase(Material material, String name, Class<? extends ItemBlock> itemBlock) {
+	protected BlockBase(Material material, String name, Class<? extends ItemBlock> itemBlock)
+	{
 		super(material);
 		setBlockName(name);
 		setBlockTextureName("ht:" + name);
@@ -19,7 +21,8 @@ public class BlockBase extends Block {
 			GameRegistry.registerBlock(this, name);
 	}
 	
-	protected BlockBase(Material material, String name) {
+	protected BlockBase(Material material, String name)
+	{
 		this(material, name, null);
 	}
 }

@@ -6,11 +6,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class ItemOPSword extends ItemSword {
+public class ItemOPSword extends ItemSword
+{
 	//Sword Material
 	public static final Item.ToolMaterial OPSwordmaterial = EnumHelper.addToolMaterial("OPSwordmaterial", 0, -1, 0.0F, 96, 50);
 	
-	public ItemOPSword(String name) {
+	public ItemOPSword(String name)
+	{
 		super(OPSwordmaterial);
 		setUnlocalizedName(name);
 		setTextureName("ht:" + name);

@@ -1,7 +1,10 @@
 package cristaltek.hitekmod.common;
 
-public class CommonProxy {
+public class CommonProxy
+{
 
-	public void registerRenderInformation() {
+	public void registerRenderInformation()
+	{
+		
 	}
 }

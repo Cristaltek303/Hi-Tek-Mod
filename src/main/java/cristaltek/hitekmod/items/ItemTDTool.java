@@ -10,12 +10,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.Configs;
 import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +41,17 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 		//Tool characteristics
 		setMaxStackSize(1);
 		canRepair = false;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list)
+	{
+		list.add(new ItemStack(item, 1, 0));
+		ItemStack charged = new ItemStack(item, 1, 0);
+		charged.stackTagCompound = new NBTTagCompound();
+		charged.stackTagCompound.setInteger("Energy", Configs.TDTool_maxEnergy);
+		list.add(charged);
 	}
 	
 	//Fortune/Silk---------------------------------------------------

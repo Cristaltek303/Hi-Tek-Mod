@@ -5,8 +5,11 @@ import java.util.List;
 import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import cristaltek.hitekmod.Configs;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +19,17 @@ public class ItemBlockEnergyCube extends ItemBlock implements IEnergyContainerIt
 	public ItemBlockEnergyCube(Block block)
 	{
 		super(block);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list)
+	{
+		list.add(new ItemStack(item, 1, 0));
+		ItemStack charged = new ItemStack(item, 1, 0);
+		charged.stackTagCompound = new NBTTagCompound();
+		charged.stackTagCompound.setInteger("Energy", Configs.energyCube_maxEnergy);
+		list.add(charged);
 	}
 	
 	@Override
@@ -63,7 +77,7 @@ public class ItemBlockEnergyCube extends ItemBlock implements IEnergyContainerIt
 	@Override
 	public int getMaxEnergyStored(ItemStack container)
 	{
-		return 10000000;
+		return Configs.energyCube_maxEnergy;
 	}
 	
 	@Override
@@ -73,7 +87,7 @@ public class ItemBlockEnergyCube extends ItemBlock implements IEnergyContainerIt
 			container.stackTagCompound = new NBTTagCompound();
 		
 		int energy = container.stackTagCompound.getInteger("Energy");
-		int energyReceived = Math.min(10000000 - energy, maxReceive);
+		int energyReceived = Math.min(Configs.energyCube_maxEnergy - energy, maxReceive);
 		
 		if (!simulate) {
 			energy += energyReceived;

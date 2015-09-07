@@ -17,6 +17,8 @@ public class Configs
 	public static int htArmor_maxEnergy;
 	public static int htArmor_energyPerTick;
 	
+	public static int energyCube_maxEnergy;
+	
 	public static int magnet_strength;
 	
 	public static void init(Configuration configuration)
@@ -37,6 +39,8 @@ public class Configs
 		
 		htArmor_maxEnergy = config.getInt("maxEnergy", "htArmor", 1000000, 1000, 10000000, "The maximum amount of energy that the XLF-1 armor can hold");
 		htArmor_energyPerTick = config.getInt("energyPerTick", "htArmor", 10, 1, 1000, "The amount of energy the XLF-1 armor consumes per tick");
+		
+		energyCube_maxEnergy = config.getInt("maxEnergy", "energyCube", 10000000, 10000, 100000000, "The maximum amount of energy that the energy cube can store");
 		
 		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "How far the magnet can reach");
 	}

@@ -9,8 +9,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.Configs;
 import cristaltek.hitekmod.HiTekMod;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,6 +38,17 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		canRepair = false;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list)
+	{
+		list.add(new ItemStack(item, 1, 0));
+		ItemStack charged = new ItemStack(item, 1, 0);
+		charged.stackTagCompound = new NBTTagCompound();
+		charged.stackTagCompound.setInteger("Energy", Configs.htArmor_maxEnergy);
+		list.add(charged);
 	}
 	
 	@Override

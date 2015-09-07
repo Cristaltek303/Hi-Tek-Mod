@@ -4,6 +4,7 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
+import cristaltek.hitekmod.Configs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 	
 	public TileEntityEnergyCube()
 	{
-		energyStorage = new EnergyStorage(10000000);
+		energyStorage = new EnergyStorage(Configs.energyCube_maxEnergy);
 	}
 	
 	@Override

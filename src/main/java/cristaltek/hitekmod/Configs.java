@@ -14,8 +14,10 @@ public class Configs
 	public static int OPSword_maxEnergy;
 	public static int OPSword_energyPerHit;
 	
-	public static int magnet_strength;
 	public static int htArmor_maxEnergy;
+	public static int htArmor_energyPerTick;
+	
+	public static int magnet_strength;
 	
 	public static void init(Configuration configuration)
 	{
@@ -33,7 +35,9 @@ public class Configs
 		OPSword_maxEnergy = config.getInt("maxEnergy", "OPSword", 1000000, 10000, 10000000, "The maximum amount of energy that the OPSword can hold");
 		OPSword_energyPerHit = config.getInt("energyPerHit", "OPSword", 100, 10, 1000, "The amount of energy the OPSword consumes per hit");
 		
-		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "How far the magnet can reach");
 		htArmor_maxEnergy = config.getInt("maxEnergy", "htArmor", 1000000, 1000, 10000000, "The maximum amount of energy that the XLF-1 armor can hold");
+		htArmor_energyPerTick = config.getInt("energyPerTick", "htArmor", 10, 1, 1000, "The amount of energy the XLF-1 armor consumes per tick");
+		
+		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "How far the magnet can reach");
 	}
 }

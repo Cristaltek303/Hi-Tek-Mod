@@ -27,3 +27,6 @@ tile.darkIronBlock.name=Dark Iron Block
 tile.energyCube.name=WIP Title
 
 itemGroup.tabHiTekMod=Hi-Tek Mod
+
+tooltip.moreInfo=Press SHIFT for more information
+tooltip.htArmor=A full set of charged XLF-1 armor allows the wearer to fly

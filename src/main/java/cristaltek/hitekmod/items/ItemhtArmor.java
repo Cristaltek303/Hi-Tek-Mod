@@ -3,6 +3,7 @@ package cristaltek.hitekmod.items;
 import java.util.List;
 
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -99,6 +102,12 @@ public class ItemhtArmor extends ItemArmor implements IEnergyContainerItem
 	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean debug)
 	{
 		info.add(this.getEnergyStored(stack) + " / " + this.getMaxEnergyStored(stack) + " RF");
+		
+		if (StringHelper.isShiftKeyDown())
+			info.add(EnumChatFormatting.DARK_PURPLE + "" + EnumChatFormatting.ITALIC +
+					StatCollector.translateToLocal("tooltip.htArmor"));
+		else
+			info.add(StatCollector.translateToLocal("tooltip.moreInfo"));
 	}
 	
 	@Override

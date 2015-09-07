@@ -2,10 +2,6 @@ package cristaltek.hitekmod.items;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,26 +10,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.Configs;
 import cristaltek.hitekmod.HiTekMod;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 {
-	//Tool/Weapons Materials
-	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 4, -1, 10000.0F, 0.0F, 35);
+	//Tool material
+	public static final ToolMaterial material = EnumHelper.addToolMaterial("TDToolMaterial", 100, 0, 10000.0F, 0.0F, 35);
 	
 	public ItemTDTool(String name)
 	{
@@ -43,9 +36,8 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 		setCreativeTab(HiTekMod.tabHiTekMod);
 		GameRegistry.registerItem(this, name);
 		
-		//Armor characteristics
+		//Tool characteristics
 		setMaxStackSize(1);
-		setMaxDamage(0);
 		canRepair = false;
 	}
 	
@@ -84,31 +76,6 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 		return itemstack;
 	}
 	
-	@Override
-	public Set<String> getToolClasses(ItemStack stack)
-	{
-		return ImmutableSet.of("pickaxe", "spade");
-	}
-	
-	//Block to Harvest--------------------------------------------------------------------------------
-	@SuppressWarnings("rawtypes")
-	public static Set effectiveAgainst = Sets.newHashSet(new Block[]
-	{
-			Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, 
-			Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, 
-			Blocks.soul_sand, Blocks.mycelium, Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, 
-			Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin
-	}
-	);
-	
-	@Override
-	public float func_150893_a(ItemStack stack, Block block)
-	{
-		if (block.getMaterial() == Material.wood || block.getMaterial() == Material.vine || block.getMaterial() == Material.plants || block.getMaterial() == Material.leaves)
-			return this.efficiencyOnProperMaterial;
-		return effectiveAgainst.contains(block) ? this.efficiencyOnProperMaterial : super.func_150893_a(stack, block);
-	}
-	
 	//Rightclick function------------------------------------------------------------------------------
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -123,6 +90,33 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 	}
 	
 	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity)
+	{
+		if (getEnergyStored(stack) >= Configs.TDTool_energyPerUse)
+			extractEnergy(stack, Configs.TDTool_energyPerUse, false);
+		
+		return true;
+	}
+	
+	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	{
+		if (getEnergyStored(stack) >= Configs.TDTool_energyPerUse)
+			return efficiencyOnProperMaterial;
+		else
+			return 0.0F;
+	}
+	
+	// Removes the visual enchantment effect
+	@Override
+	public boolean hasEffect(ItemStack itemstack, int pass)
+	{
+		return false;
+	}
+	
+	// Energy implementation (with durability bar & tooltip information)
+	
+	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
 		return 1.0 - (double)this.getEnergyStored(stack) / (double)this.getMaxEnergyStored(stack);
 	}
@@ -133,24 +127,6 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 		return this.getEnergyStored(stack) < this.getMaxEnergyStored(stack);
 	}
 	
-	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity)
-	{
-		if (getEnergyStored(stack) >= 100)
-			extractEnergy(stack, 100, false);
-		
-		return true;
-	}
-	
-	@Override
-	public float getDigSpeed(ItemStack stack, Block block, int meta)
-	{
-		if (getEnergyStored(stack) >= 100)
-			return super.getDigSpeed(stack, block, meta);
-		else
-			return 0.0F;
-	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -159,12 +135,6 @@ public class ItemTDTool extends ItemPickaxe implements IEnergyContainerItem
 		info.add(this.getEnergyStored(stack) + " / " + this.getMaxEnergyStored(stack) + " RF");
 	}
 	
-	@Override
-	public boolean hasEffect(ItemStack itemstack, int pass)
-	{
-		return false;
-	}
-
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate)
 	{

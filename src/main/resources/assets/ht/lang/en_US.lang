@@ -25,6 +25,7 @@ item.Magnet.name=Adhesion Enforcer
 tile.darkstarBlock.name=Darkstar Block
 tile.darkIronBlock.name=Dark Iron Block
 tile.energyCube.name=WIP Title
+tile.smelter.name=Smelter
 
 itemGroup.tabHiTekMod=Hi-Tek Mod
 

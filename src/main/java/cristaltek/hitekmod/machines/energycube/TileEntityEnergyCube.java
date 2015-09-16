@@ -88,7 +88,6 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 		return energyStorage.receiveEnergy(maxExtract, simulate);
 	}
 
-	
 	@Override
 	public int getEnergyStored(ForgeDirection from)
 	{

@@ -166,4 +166,5 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		return false;
 	}
+	
 }

@@ -1,6 +1,5 @@
 package cristaltek.hitekmod.machines.smelter;
 
-import cristaltek.hitekmod.machines.energycube.TileEntityEnergyCube;
 import cristaltek.hitekmod.reference.Textures;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +25,5 @@ public class GuiSmelter extends GuiContainer
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
-		
 	}
-
 }

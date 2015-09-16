@@ -1,9 +1,7 @@
 package cristaltek.hitekmod.machines.smelter;
 
 import cristaltek.hitekmod.inventory.ContainerBase;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 public class ContainerSmelter extends ContainerBase
@@ -14,13 +12,6 @@ public class ContainerSmelter extends ContainerBase
 	{
 		this.smelter = smelter;
 		this.addPlayerInventorySlots(player.inventory);
-		
-		for (int i = 0; i < 4; ++i)
-		{
-			final int armorType = i;
-			final Entity entity = player;
-			this.addSlotToContainer(new Slot(player.inventory, player.inventory.getSizeInventory() - 1 - i, 40 + i * 20, 60));
-		}
 		
 		//Input
 		this.addSlotToContainer(new Slot(smelter, 0, 18, 20));
@@ -43,5 +34,4 @@ public class ContainerSmelter extends ContainerBase
 		this.addSlotToContainer(new Slot(smelter, 7, 165, 62));
 		this.addSlotToContainer(new Slot(smelter, 8, 186, 62));
 	}
-
 }

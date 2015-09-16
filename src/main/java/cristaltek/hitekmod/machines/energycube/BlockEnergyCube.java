@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.HiTekMod;
 import cristaltek.hitekmod.blocks.BlockBase;
+import cristaltek.hitekmod.handlers.GuiHandler.Gui;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -50,7 +51,7 @@ public class BlockEnergyCube extends BlockBase implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float xOffset, float yOffset, float zOffset)
 	{
-		player.openGui(HiTekMod.instance, 1, world, x, y, z);
+		player.openGui(HiTekMod.instance, Gui.ENERGY_CUBE.ordinal(), world, x, y, z);
 		return true;
 	}
 	

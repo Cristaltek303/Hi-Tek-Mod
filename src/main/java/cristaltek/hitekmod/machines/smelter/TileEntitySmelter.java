@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISidedInventory
 {
 	private EnergyStorage energyStorage;
-	private ItemStack[] inventory = new ItemStack[2];
+	private ItemStack[] inventory = new ItemStack[18];
 	
 	public TileEntitySmelter()
 	{
@@ -166,7 +166,4 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		return false;
 	}
-
-	
-
 }

@@ -5,6 +5,7 @@ import cofh.api.energy.IEnergyHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -31,9 +32,9 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	}
 	
 	@Override
-	public int receiveEnergy(ForgeDirection from, int maxExtract, boolean simulate)
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
 	{
-		return energyStorage.receiveEnergy(maxExtract, simulate);
+		return energyStorage.receiveEnergy(maxReceive, simulate);
 	}
 
 	@Override
@@ -166,5 +167,31 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		return false;
 	}
-	
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag)
+	{
+		super.writeToNBT(tag);
+		energyStorage.writeToNBT(tag);
+/*
+		NBTTagCompound inputSlot = new NBTTagCompound();
+		if (this.inventory[0] != null)
+			this.inventory[0].writeToNBT(inputSlot);
+		tag.setTag("inputSlot", inputSlot);
+
+		NBTTagCompound outputSlot = new NBTTagCompound();
+		if (this.inventory[1] != null)
+			this.inventory[1].writeToNBT(outputSlot);
+		tag.setTag("outputSlot", outputSlot);*/
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		energyStorage.readFromNBT(tag);
+/*		
+		this.inventory[0] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("inputSlot"));
+		this.inventory[1] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("outputSlot"));*/
+	}
 }

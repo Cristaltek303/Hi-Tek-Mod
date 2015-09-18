@@ -39,6 +39,7 @@ public class ContainerSmelter extends ContainerBase
 		this.addSlotToContainer(new Slot(smelter, 16, 165, 62));
 		this.addSlotToContainer(new Slot(smelter, 17, 186, 62));
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void detectAndSendChanges()
@@ -47,11 +48,12 @@ public class ContainerSmelter extends ContainerBase
 		for (ICrafting craft : (List<ICrafting>)this.crafters)
 			craft.sendProgressBarUpdate(this, 0, this.smelter.getEnergyStored(null));
 	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int value)
 	{
 		if (id == 0)
-			this.smelter.setEnergyStored(id);
+			this.smelter.setEnergyStored(value);
 	}
 }

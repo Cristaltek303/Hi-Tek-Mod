@@ -31,13 +31,13 @@ public class GuiSmelter extends GuiContainer
 		double percent = (double)this.smelter.getEnergyStored(null) / (double)this.smelter.getMaxEnergyStored(null);
 		drawTexturedModalRect(xStart + 162, yStart + 5, 0, 200, (int)(percent * 50), 5);
 		if (x >= this.guiLeft + 162 && x <= this.guiLeft + (162 + 50) &&
-				y >= this.guiTop + 5 && y <= this.guiTop + (5 + 5));
-//		{
-//			List<String> tooltip = new ArrayList<String>();
-//			String stored = String.format("%,d", this.smelter.getEnergyStored(null));
-//			String max = String.format("%,d", this.smelter.getMaxEnergyStored(null));
-//			tooltip.add(stored + " / " + max + " RF");
-//			this.drawHoveringText(tooltip, x, y, fontRendererObj);
-//		}
+				y >= this.guiTop + 5 && y <= this.guiTop + (5 + 5))
+		{
+			List<String> tooltip = new ArrayList<String>();
+			String stored = String.format("%,d", this.smelter.getEnergyStored(null));
+			String max = String.format("%,d", this.smelter.getMaxEnergyStored(null));
+			tooltip.add(stored + " / " + max + " RF");
+			this.drawHoveringText(tooltip, x, y, fontRendererObj);
+		}
 	}
 }

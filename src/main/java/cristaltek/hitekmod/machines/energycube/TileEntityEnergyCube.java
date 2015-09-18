@@ -61,7 +61,7 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 					IEnergyReceiver energyReceiver = (IEnergyReceiver)tileEntity;
 					if (energyReceiver.canConnectEnergy(dir.getOpposite()))
 					{
-						int energyToSend = this.energyStorage.extractEnergy(10, true);
+						int energyToSend = this.energyStorage.extractEnergy(1000, true);
 						int energySent = energyReceiver.receiveEnergy(dir.getOpposite(), energyToSend, false);
 						this.energyStorage.extractEnergy(energySent, false);
 					}
@@ -83,9 +83,9 @@ public class TileEntityEnergyCube extends TileEntity implements IEnergyHandler, 
 	}
 
 	@Override
-	public int receiveEnergy(ForgeDirection from, int maxExtract, boolean simulate)
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
 	{
-		return energyStorage.receiveEnergy(maxExtract, simulate);
+		return energyStorage.receiveEnergy(maxReceive, simulate);
 	}
 
 	@Override

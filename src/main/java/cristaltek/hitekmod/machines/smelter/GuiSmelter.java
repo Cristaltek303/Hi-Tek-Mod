@@ -25,9 +25,14 @@ public class GuiSmelter extends GuiContainer
 	{
 		mc.getTextureManager().bindTexture(Textures.Gui.SMELTER);
 		
+		// Draw GUI background
 		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+		// Draw progress arrows
+		for (int i = 0; i < 9; i++)
+			drawTexturedModalRect(xStart + 22 + i * 21, yStart + 39, 0, 206, 8, (int)(smelter.getSmeltProgress(i) * 20));
+		// Draw energy bar
 		double percent = (double)this.smelter.getEnergyStored(null) / (double)this.smelter.getMaxEnergyStored(null);
 		drawTexturedModalRect(xStart + 162, yStart + 5, 0, 200, (int)(percent * 50), 5);
 		if (x >= this.guiLeft + 162 && x <= this.guiLeft + (162 + 50) &&

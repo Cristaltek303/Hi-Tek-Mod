@@ -2,9 +2,12 @@ package cristaltek.hitekmod.machines.smelter;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -13,10 +16,79 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 {
 	private EnergyStorage energyStorage;
 	private ItemStack[] inventory = new ItemStack[18];
+	public int[] smeltTime = new int[9];
+	private int energyPerTick = 100;
 	
 	public TileEntitySmelter()
 	{
 		energyStorage = new EnergyStorage(1000000);
+	}
+
+	@Override
+	public void updateEntity()
+	{
+		if (!worldObj.isRemote)
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				if (canSmelt(i) && getEnergyStored(null) >= energyPerTick)
+				{
+					extractEnergy(null, energyPerTick, false);
+					smeltTime[i]++;
+					if (smeltTime[i] >= 200)
+					{
+						smeltTime[i] = 0;
+						smeltItem(i);
+					}
+				}
+				else
+					smeltTime[i] = 0;
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public double getSmeltProgress(int slot)
+	{
+		return smeltTime[slot] / 200D;
+	}
+
+	private boolean canSmelt(int slot)
+	{
+		if (inventory[slot] == null)
+		{
+			return false;
+		}
+		else
+		{
+			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(inventory[slot]);
+			if (itemstack == null)
+				return false;
+			if (inventory[slot + 9] == null)
+				return true;
+			if (!inventory[slot + 9].isItemEqual(itemstack))
+				return false;
+			int result = inventory[slot + 9].stackSize + itemstack.stackSize;
+			return result <= getInventoryStackLimit() && result <= inventory[slot + 9].getMaxStackSize();
+		}
+	}
+
+	public void smeltItem(int slot)
+	{
+		if (canSmelt(slot))
+		{
+			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(inventory[slot]);
+
+			if (inventory[slot + 9] == null)
+				inventory[slot + 9] = itemstack.copy();
+			else if (inventory[slot + 9].getItem() == itemstack.getItem())
+				inventory[slot + 9].stackSize += itemstack.stackSize;
+
+			inventory[slot].stackSize--;
+
+			if (inventory[slot].stackSize <= 0)
+				inventory[slot] = null;
+		}
 	}
 
 	@Override
@@ -147,7 +219,7 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return true;
+		return (slot < 9) ? true : false;
 	}
 
 	@Override
@@ -173,16 +245,18 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		super.writeToNBT(tag);
 		energyStorage.writeToNBT(tag);
-/*
-		NBTTagCompound inputSlot = new NBTTagCompound();
-		if (this.inventory[0] != null)
-			this.inventory[0].writeToNBT(inputSlot);
-		tag.setTag("inputSlot", inputSlot);
 
-		NBTTagCompound outputSlot = new NBTTagCompound();
-		if (this.inventory[1] != null)
-			this.inventory[1].writeToNBT(outputSlot);
-		tag.setTag("outputSlot", outputSlot);*/
+		for (int i = 0; i < inventory.length; i++)
+		{
+			if (i < 9)
+				tag.setShort("SmeltTime" + i, (short)smeltTime[i]);
+			if (inventory[i] != null)
+			{
+				NBTTagCompound inventorySlot = new NBTTagCompound();
+				inventory[i].writeToNBT(inventorySlot);
+				tag.setTag("Inventory" + i, inventorySlot);
+			}
+		}
 	}
 
 	@Override
@@ -190,8 +264,12 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		super.readFromNBT(tag);
 		energyStorage.readFromNBT(tag);
-/*		
-		this.inventory[0] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("inputSlot"));
-		this.inventory[1] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("outputSlot"));*/
+
+		for (int i = 0; i < inventory.length; i++)
+		{
+			if (i < 9)
+				smeltTime[i] = tag.getShort("SmeltTime" + i);
+			inventory[i] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Inventory" + i));
+		}
 	}
 }

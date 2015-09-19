@@ -2,12 +2,17 @@ package cristaltek.hitekmod.machines.smelter;
 
 import java.util.List;
 
+import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cristaltek.hitekmod.inventory.ContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class ContainerSmelter extends ContainerBase
 {
@@ -19,25 +24,11 @@ public class ContainerSmelter extends ContainerBase
 		this.addPlayerInventorySlots(player.inventory);
 		
 		//Input
-		this.addSlotToContainer(new Slot(smelter, 0, 18, 20));
-		this.addSlotToContainer(new Slot(smelter, 1, 39, 20));
-		this.addSlotToContainer(new Slot(smelter, 2, 60, 20));
-		this.addSlotToContainer(new Slot(smelter, 3, 81, 20));
-		this.addSlotToContainer(new Slot(smelter, 4, 102, 20));
-		this.addSlotToContainer(new Slot(smelter, 5, 123, 20));
-		this.addSlotToContainer(new Slot(smelter, 6, 144, 20));
-		this.addSlotToContainer(new Slot(smelter, 7, 165, 20));
-		this.addSlotToContainer(new Slot(smelter, 8, 186, 20));
-		//output
-		this.addSlotToContainer(new Slot(smelter, 9, 18, 62));
-		this.addSlotToContainer(new Slot(smelter, 10, 39, 62));
-		this.addSlotToContainer(new Slot(smelter, 11, 60, 62));
-		this.addSlotToContainer(new Slot(smelter, 12, 81, 62));
-		this.addSlotToContainer(new Slot(smelter, 13, 102, 62));
-		this.addSlotToContainer(new Slot(smelter, 14, 123, 62));
-		this.addSlotToContainer(new Slot(smelter, 15, 144, 62));
-		this.addSlotToContainer(new Slot(smelter, 16, 165, 62));
-		this.addSlotToContainer(new Slot(smelter, 17, 186, 62));
+		for (int i = 0; i < 9; i++)
+			addSlotToContainer(new Slot(smelter, i, 18 + i * 21, 20));
+		//Output
+		for (int i = 0; i < 9; i++)
+			addSlotToContainer(new SlotFurnace(player, smelter, i + 9, 18 + i * 21, 62));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -46,7 +37,11 @@ public class ContainerSmelter extends ContainerBase
 	{
 		super.detectAndSendChanges();
 		for (ICrafting craft : (List<ICrafting>)this.crafters)
+		{
 			craft.sendProgressBarUpdate(this, 0, this.smelter.getEnergyStored(null));
+			for (int i = 0; i < 9; i++)
+				craft.sendProgressBarUpdate(this, i + 1, smelter.smeltTime[i]);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -55,5 +50,34 @@ public class ContainerSmelter extends ContainerBase
 	{
 		if (id == 0)
 			this.smelter.setEnergyStored(value);
+		else
+			smelter.smeltTime[id - 1] = value;
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotId)
+	{
+		ItemStack itemstack = null;
+		Slot slot = (Slot)this.inventorySlots.get(slotId);
+		
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+			
+			if (slotId >= 0 && slotId < 36 && FurnaceRecipes.smelting().getSmeltingResult(itemstack) != null)
+			{
+				if (!this.mergeItemStack(itemstack1, 36, 45, false))
+					return null;
+			}
+			else
+				return super.transferStackInSlot(player, slotId);
+			
+			if (itemstack1.stackSize == 0)
+				slot.putStack(null);
+			else
+				slot.onSlotChanged();
+		}
+		return itemstack;
 	}
 }

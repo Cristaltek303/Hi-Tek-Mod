@@ -3,21 +3,42 @@ package cristaltek.hitekmod.machines.smelter;
 import java.util.ArrayList;
 import java.util.List;
 
+import cristaltek.hitekmod.client.gui.GuiConfigurable;
+import cristaltek.hitekmod.client.gui.button.CraftingTabletButton;
+import cristaltek.hitekmod.client.gui.button.TabButton;
+import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.network.PacketHandler;
+import cristaltek.hitekmod.network.message.BalanceMessage;
+import cristaltek.hitekmod.network.message.CraftingTabletMessage;
 import cristaltek.hitekmod.reference.Textures;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class GuiSmelter extends GuiContainer
+public class GuiSmelter extends GuiConfigurable
 {
 	private TileEntitySmelter smelter;
+	
+	private TabButton balanceTabButton;
 
 	public GuiSmelter(EntityPlayer player, TileEntitySmelter smelter)
 	{
 		super(new ContainerSmelter(player, smelter));
-		xSize = 240;
-		ySize = 193;
 		
 		this.smelter = smelter;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+		
+		int xStart = (width - xSize) / 2;
+		int yStart = (height - ySize) / 2;
+		
+		buttonList.add(balanceTabButton = new TabButton(xStart - 20, yStart + 17, 20, 21, 0, TabButton.BALANCE));
+		balanceTabButton.active = smelter.balance;
 	}
 	
 	@Override
@@ -44,5 +65,19 @@ public class GuiSmelter extends GuiContainer
 			tooltip.add(stored + " / " + max + " RF");
 			this.drawHoveringText(tooltip, x, y, fontRendererObj);
 		}
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button)
+	{
+		if (button == balanceTabButton)
+		{
+			smelter.balance = !smelter.balance;
+			TabButton button1 = (TabButton)button;
+			button1.active = smelter.balance;
+			PacketHandler.INSTANCE.sendToServer(new BalanceMessage(smelter.xCoord, smelter.yCoord, smelter.zCoord, smelter.balance));
+		}
+		else
+			super.actionPerformed(button);
 	}
 }

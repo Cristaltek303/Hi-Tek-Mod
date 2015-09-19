@@ -19,6 +19,8 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	public int[] smeltTime = new int[9];
 	private int energyPerTick = 100;
 	
+	public boolean balance;
+	
 	public TileEntitySmelter()
 	{
 		energyStorage = new EnergyStorage(1000000);
@@ -43,6 +45,34 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 				}
 				else
 					smeltTime[i] = 0;
+			}
+			if (balance)
+				balanceInput();
+		}
+	}
+
+	public void balanceInput()
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			ItemStack itemStack1 = getStackInSlot(i);
+			if (itemStack1 == null)
+				continue;
+
+			for (int j = 0; j < 9; j++)
+			{
+				if (i == j)
+					continue;
+
+				ItemStack itemStack2 = getStackInSlot(j);
+				if (itemStack2 == null)
+					setInventorySlotContents(j, itemStack1.splitStack(itemStack1.stackSize / 2));
+				else if (itemStack1.getItem() == itemStack2.getItem())
+				{
+					int totalSize = itemStack1.stackSize + itemStack2.stackSize;
+					itemStack1.stackSize = totalSize / 2 + totalSize % 2;
+					itemStack2.stackSize = totalSize / 2;
+				}
 			}
 		}
 	}
@@ -245,6 +275,7 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		super.writeToNBT(tag);
 		energyStorage.writeToNBT(tag);
+		tag.setBoolean("Balance", balance);
 
 		for (int i = 0; i < inventory.length; i++)
 		{
@@ -264,6 +295,7 @@ public class TileEntitySmelter extends TileEntity implements IEnergyHandler, ISi
 	{
 		super.readFromNBT(tag);
 		energyStorage.readFromNBT(tag);
+		balance = tag.getBoolean("Balance");
 
 		for (int i = 0; i < inventory.length; i++)
 		{

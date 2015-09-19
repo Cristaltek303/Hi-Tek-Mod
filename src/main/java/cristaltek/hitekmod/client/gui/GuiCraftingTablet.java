@@ -34,7 +34,7 @@ public class GuiCraftingTablet extends GuiContainer
 	{
 		super.initGui();
 		
-		int xStart = ((width - xSize) / 2);
+		int xStart = (width - xSize) / 2;
 		int yStart = (height - ySize) / 2;
 		
 		this.buttonList.add(this.balanceButton = new CraftingTabletButton(1, xStart + 30, yStart + 26, 13, 13, CraftingTabletButton.BALANCE));

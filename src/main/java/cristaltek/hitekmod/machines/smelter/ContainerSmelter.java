@@ -1,5 +1,6 @@
 package cristaltek.hitekmod.machines.smelter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cofh.api.energy.IEnergyContainerItem;

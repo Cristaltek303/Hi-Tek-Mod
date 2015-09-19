@@ -57,7 +57,7 @@ public class HiTekMod
 		@Override
 		public Item getTabIconItem()
 		{
-			return ModItems.darkstar;
+			return ModItems.Darkstar;
 		}
 	};
 }

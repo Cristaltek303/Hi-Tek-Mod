@@ -26,7 +26,7 @@ public class BlockEnergyCube extends BlockBase implements ITileEntityProvider
 	
 	public BlockEnergyCube()
 	{
-		super(Material.iron, "energyCube", ItemBlockEnergyCube.class);
+		super(Material.iron, "EnergyCube", ItemBlockEnergyCube.class);
 		GameRegistry.registerTileEntity(TileEntityEnergyCube.class, "tileEnergyCube");
 	}
 	

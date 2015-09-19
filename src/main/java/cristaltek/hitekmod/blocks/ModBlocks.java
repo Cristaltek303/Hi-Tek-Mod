@@ -8,19 +8,19 @@ import net.minecraft.block.material.Material;
 public class ModBlocks
 {
 	//Blocks
-	public static Block darkstarBlock;
-	public static Block darkIronBlock;
+	public static Block DarkstarBlock;
+	public static Block DarkIronBlock;
 	//Machines
-	public static Block energyCube;
-	public static Block smelter;
+	public static Block EnergyCube;
+	public static Block Smelter;
 
 	public static void init()
 	{
 		//Blocks
-		darkstarBlock = new BlockBase(Material.rock, "darkstarBlock");
-		darkIronBlock = new BlockBase(Material.iron, "darkIronBlock");
+		DarkstarBlock = new BlockBase(Material.rock, "DarkstarBlock");
+		DarkIronBlock = new BlockBase(Material.iron, "DarkIronBlock");
 		//Machines
-		energyCube = new BlockEnergyCube();
-		smelter = new BlockSmelter();
+		EnergyCube = new BlockEnergyCube();
+		Smelter = new BlockSmelter();
 	}
 }

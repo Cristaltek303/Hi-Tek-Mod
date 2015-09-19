@@ -5,13 +5,13 @@ import net.minecraft.item.Item;
 public class ModItems
 {
 	//Items
-	public static Item darkstar;
-	public static Item concentratedDarkstar;
-	public static Item staffHandle;
-	public static Item imbuer;
-	public static Item handle;
-	public static Item darkEnergyIngot;
-	public static Item craftingChip;
+	public static Item Darkstar;
+	public static Item ConcentratedDarkstar;
+	public static Item StaffHandle;
+	public static Item Imbuer;
+	public static Item Handle;
+	public static Item DarkEnergyIngot;
+	public static Item CraftingChip;
 	
 	//Items for Machine crafting
 	public static Item RawSilicon;
@@ -21,9 +21,9 @@ public class ModItems
 	public static Item VIStabilizer;// ==> Machine Frame
 	
 	//Tools/Weapons
-	public static Item TDTool; //WIP
+	public static Item TDTool;
 	public static Item OPSword; //WIP
-	public static Item CraftingTablet; //WIP
+	public static Item CraftingTablet;
 	public static Item Magnet;
 	
 	//Armor
@@ -35,13 +35,13 @@ public class ModItems
 	public static void init()
 	{
 		//Items
-		darkstar = new ItemBase("darkstar");
-		concentratedDarkstar = new ItemBase("concentratedDarkstar");
-		staffHandle = new ItemBase("staffHandle");
-		imbuer = new ItemBase("imbuer");
-		handle = new ItemBase("handle");
-		darkEnergyIngot = new ItemBase("darkEnergyIngot");
-		craftingChip = new ItemBase("CraftingChip");
+		Darkstar = new ItemBase("Darkstar");
+		ConcentratedDarkstar = new ItemBase("ConcentratedDarkstar");
+		StaffHandle = new ItemBase("StaffHandle");
+		Imbuer = new ItemBase("Imbuer");
+		Handle = new ItemBase("Handle");
+		DarkEnergyIngot = new ItemBase("DarkEnergyIngot");
+		CraftingChip = new ItemBase("CraftingChip");
 		CircuitBoard = new ItemBase("CircuitBoard");
 		RawSilicon = new ItemBase("RawSilicon");
 		Silicon = new ItemBase("Silicon");
@@ -49,7 +49,7 @@ public class ModItems
 		VIStabilizer = new ItemBase("VIStabilizer");
 		
 		//Tool/Weapons
-		TDTool = new ItemTDTool("temporalDecompositionTool");
+		TDTool = new ItemTDTool("TemporalDecompositionTool");
 		OPSword = new ItemOPSword("OPSword");
 		CraftingTablet = new ItemCraftingTablet("CraftingTablet");
 		Magnet = new ItemMagnet("Magnet");

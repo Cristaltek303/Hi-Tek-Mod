@@ -1,9 +1,9 @@
-item.darkstar.name=Darkstar
-item.concentratedDarkstar.name=Concentrated Darkstar
-item.staffHandle.name=Staff Handle
-item.imbuer.name=Imbuer
-item.handle.name=Handle
-item.darkEnergyIngot.name=Dark Energy Ingot
+item.Darkstar.name=Darkstar
+item.ConcentratedDarkstar.name=Concentrated Darkstar
+item.StaffHandle.name=Staff Handle
+item.Imbuer.name=Imbuer
+item.Handle.name=Handle
+item.DarkEnergyIngot.name=Dark Energy Ingot
 item.CraftingChip.name=Crafting Chip
 item.RawSilicon.name=Raw Silicon
 item.Silicon.name=Silicon
@@ -17,15 +17,15 @@ item.htLeggings.name=XLF-1 Leggings
 item.htBoots.name=XLF-1 Boots
 
 
-item.temporalDecompositionTool.name=Temporal Decomposing Tool
+item.TemporalDecompositionTool.name=Temporal Decomposing Tool
 item.OPSword.name=Molecular Defragmenter
 item.CraftingTablet.name=Crafting Tablet
 item.Magnet.name=Adhesion Enforcer
 
-tile.darkstarBlock.name=Darkstar Block
-tile.darkIronBlock.name=Dark Iron Block
-tile.energyCube.name=WIP Title
-tile.smelter.name=Smelter
+tile.DarkstarBlock.name=Darkstar Block
+tile.DarkIronBlock.name=Dark Iron Block
+tile.EnergyCube.name=WIP Title
+tile.Smelter.name=Smelter
 
 itemGroup.tabHiTekMod=Hi-Tek Mod
 

@@ -15,7 +15,7 @@ public class BlockSmelter extends BlockBase implements ITileEntityProvider
 
 	public BlockSmelter()
 	{
-		super(Material.iron, "smelter");
+		super(Material.iron, "Smelter");
 		GameRegistry.registerTileEntity(TileEntitySmelter.class, "tileSmelter");
 	}
 	

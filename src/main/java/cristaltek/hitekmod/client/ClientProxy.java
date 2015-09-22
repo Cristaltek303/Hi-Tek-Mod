@@ -1,7 +1,9 @@
 package cristaltek.hitekmod.client;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import cristaltek.hitekmod.blocks.rendering.BlockRenderer;
 import cristaltek.hitekmod.common.CommonProxy;
 import cristaltek.hitekmod.items.ModItems;
 import cristaltek.hitekmod.items.rendering.ItemRenderer;
@@ -18,5 +20,7 @@ public class ClientProxy extends CommonProxy
 		
 		MinecraftForgeClient.registerItemRenderer(ModItems.OPSword, itemRenderer);
 		MinecraftForgeClient.registerItemRenderer(ModItems.TDTool, itemRenderer);
+		
+		RenderingRegistry.registerBlockHandler(new BlockRenderer());
 	}
 }

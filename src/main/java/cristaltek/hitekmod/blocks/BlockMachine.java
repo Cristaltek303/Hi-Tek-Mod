@@ -1,12 +1,8 @@
 package cristaltek.hitekmod.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cristaltek.hitekmod.HiTekMod;
-import cristaltek.hitekmod.machines.smelter.ItemBlockSmelter;
-import cristaltek.hitekmod.machines.smelter.TileEntitySmelter;
-import net.minecraft.block.Block;
+import cristaltek.hitekmod.blocks.rendering.BlockRenderer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMachine extends BlockBase
 {
@@ -48,21 +43,26 @@ public class BlockMachine extends BlockBase
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		switch (side)
-		{
-		case 0:
+		int[][] dir = {{3, 5, 4}, {4, 3, 2}, {2, 4, 5}, {5, 2, 3}}; // {back, left, right}
+		
+		if (side == 0)
 			return iconBottom;
-		case 1:
+		else if (side == 1)
 			return iconTop;
-		case 3:
+		else if (side == dir[meta][0])
 			return iconBack;
-		case 4:
-			return new IconFlipped(iconSide, true, false);
-		case 5:
+		else if (side == dir[meta][1])
 			return iconSide;
-		default:
-			return super.getIcon(side, meta);
-		}
+		else if (side == dir[meta][2])
+			return new IconFlipped(iconSide, true, false);
+		else
+			return blockIcon;
+	}
+	
+	@Override
+	public int getRenderType()
+	{
+		return BlockRenderer.renderId;
 	}
 	
 	@Override

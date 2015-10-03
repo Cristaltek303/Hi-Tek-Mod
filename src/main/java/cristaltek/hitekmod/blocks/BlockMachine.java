@@ -2,7 +2,6 @@ package cristaltek.hitekmod.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cristaltek.hitekmod.blocks.rendering.BlockRenderer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -57,12 +56,6 @@ public class BlockMachine extends BlockBase
 			return new IconFlipped(iconSide, true, false);
 		else
 			return blockIcon;
-	}
-	
-	@Override
-	public int getRenderType()
-	{
-		return BlockRenderer.renderId;
 	}
 	
 	@Override

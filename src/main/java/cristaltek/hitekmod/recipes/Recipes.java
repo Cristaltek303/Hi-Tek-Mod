@@ -1,4 +1,6 @@
-package cristaltek.hitekmod;
+package cristaltek.hitekmod.recipes;
+
+import java.util.HashMap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cristaltek.hitekmod.blocks.ModBlocks;
@@ -9,6 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class Recipes
 {
+	private static HashMap crusherRecipes = new HashMap();
 
 	public static void init()
 	{
@@ -37,5 +40,21 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.DarkEnergyIngot,  9), new ItemStack(ModBlocks.DarkIronBlock));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.DarkIronBlock), new Object[]{"AAA", "AAA", "AAA", 'A', ModItems.DarkEnergyIngot});//Dark Iron Block
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.DarkstarBlock), new Object[]{"DDD","DDD","DDD", 'D', ModItems.Darkstar}); //Darkstar Block
+		
+		// Crusher Recipes
+		addCrusherRecipe(new ItemStack(Blocks.coal_ore), new ItemStack(Items.coal, 5), new ItemStack(Items.diamond), 0.5F);
+	}
+	
+	public static void addCrusherRecipe(ItemStack input, ItemStack mainOutput, ItemStack secOutput, float chance)
+	{
+		crusherRecipes.put(input.getItem(), new CrusherRecipe(input, mainOutput, secOutput, chance));
+	}
+	
+	public static CrusherRecipe getCrusherRecipe(ItemStack input)
+	{
+		if (crusherRecipes.containsKey(input.getItem()))
+			return (CrusherRecipe)crusherRecipes.get(input.getItem());
+		else
+			return null;
 	}
 }

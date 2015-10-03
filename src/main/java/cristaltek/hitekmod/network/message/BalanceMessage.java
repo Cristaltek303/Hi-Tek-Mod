@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.machines.crusher.TileEntityCrusher;
 import cristaltek.hitekmod.machines.smelter.TileEntitySmelter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
@@ -54,6 +55,11 @@ public class BalanceMessage implements IMessage
 			{
 				TileEntitySmelter smelter = (TileEntitySmelter)tileEntity;
 				smelter.balance = message.balance;
+			}
+			else if (tileEntity instanceof TileEntityCrusher)
+			{
+				TileEntityCrusher crusher = (TileEntityCrusher)tileEntity;
+				crusher.balance = message.balance;
 			}
 			return null;
 		}

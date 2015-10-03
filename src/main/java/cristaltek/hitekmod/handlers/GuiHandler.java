@@ -3,6 +3,9 @@ package cristaltek.hitekmod.handlers;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cristaltek.hitekmod.client.gui.GuiCraftingTablet;
 import cristaltek.hitekmod.inventory.ContainerCraftingTablet;
+import cristaltek.hitekmod.machines.crusher.ContainerCrusher;
+import cristaltek.hitekmod.machines.crusher.GuiCrusher;
+import cristaltek.hitekmod.machines.crusher.TileEntityCrusher;
 import cristaltek.hitekmod.machines.energycube.ContainerEnergyCube;
 import cristaltek.hitekmod.machines.energycube.GuiEnergyCube;
 import cristaltek.hitekmod.machines.energycube.TileEntityEnergyCube;
@@ -17,7 +20,7 @@ public class GuiHandler implements IGuiHandler
 
 	public enum Gui
 	{
-		CRAFTING_TABLET, ENERGY_CUBE, SMELTER;
+		CRAFTING_TABLET, ENERGY_CUBE, SMELTER, CRUSHER;
 	}
 	
 	@Override
@@ -34,6 +37,11 @@ public class GuiHandler implements IGuiHandler
 		{
 			TileEntitySmelter smelter = (TileEntitySmelter)world.getTileEntity(x, y, z);
 			return new ContainerSmelter(player, smelter);
+		}
+		else if (ID == Gui.CRUSHER.ordinal())
+		{
+			TileEntityCrusher crusher = (TileEntityCrusher)world.getTileEntity(x, y, z);
+			return new ContainerCrusher(player, crusher);
 		}
 		else
 			return null;
@@ -53,6 +61,11 @@ public class GuiHandler implements IGuiHandler
 		{
 			TileEntitySmelter smelter = (TileEntitySmelter)world.getTileEntity(x, y, z);
 			return new GuiSmelter(player, smelter);
+		}
+		else if (ID == Gui.CRUSHER.ordinal())
+		{
+			TileEntityCrusher crusher = (TileEntityCrusher)world.getTileEntity(x, y, z);
+			return new GuiCrusher(player, crusher);
 		}
 		else
 			return null;

@@ -13,6 +13,7 @@ import cristaltek.hitekmod.common.CommonProxy;
 import cristaltek.hitekmod.handlers.GuiHandler;
 import cristaltek.hitekmod.items.ModItems;
 import cristaltek.hitekmod.network.PacketHandler;
+import cristaltek.hitekmod.recipes.Recipes;
 import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

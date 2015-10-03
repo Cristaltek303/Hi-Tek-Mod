@@ -1,5 +1,6 @@
 package cristaltek.hitekmod.blocks;
 
+import cristaltek.hitekmod.machines.crusher.BlockCrusher;
 import cristaltek.hitekmod.machines.energycube.BlockEnergyCube;
 import cristaltek.hitekmod.machines.smelter.BlockSmelter;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ public class ModBlocks
 	//Machines
 	public static Block EnergyCube;
 	public static Block Smelter;
+	public static Block Crusher;
 
 	public static void init()
 	{
@@ -22,5 +24,6 @@ public class ModBlocks
 		//Machines
 		EnergyCube = new BlockEnergyCube();
 		Smelter = new BlockSmelter();
+		Crusher = new BlockCrusher();
 	}
 }

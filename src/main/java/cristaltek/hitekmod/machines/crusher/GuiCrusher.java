@@ -38,6 +38,11 @@ public class GuiCrusher extends GuiConfigurable
 		int yStart = (height - ySize) / 2;
 		
 		buttonList.add(balanceTabButton = new TabButton(xStart - 20, yStart + 17, 20, 21, 0, TabButton.BALANCE));
+	}
+	
+	@Override
+	protected void drawGuiContainerForegroundLayer(int x, int y)
+	{
 		balanceTabButton.active = crusher.balance;
 	}
 	

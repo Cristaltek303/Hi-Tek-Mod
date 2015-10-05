@@ -42,6 +42,7 @@ public class ContainerSmelter extends ContainerBase
 			craft.sendProgressBarUpdate(this, 0, this.smelter.getEnergyStored(null));
 			for (int i = 0; i < 9; i++)
 				craft.sendProgressBarUpdate(this, i + 1, smelter.smeltTime[i]);
+			craft.sendProgressBarUpdate(this, 10, smelter.balance ? 1 : 0);
 		}
 	}
 
@@ -51,6 +52,8 @@ public class ContainerSmelter extends ContainerBase
 	{
 		if (id == 0)
 			this.smelter.setEnergyStored(value);
+		else if (id == 10)
+			smelter.balance = (value != 0);
 		else
 			smelter.smeltTime[id - 1] = value;
 	}

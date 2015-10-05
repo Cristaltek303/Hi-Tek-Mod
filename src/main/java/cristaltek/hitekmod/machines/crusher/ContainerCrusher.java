@@ -43,6 +43,7 @@ public class ContainerCrusher extends ContainerBase
 			craft.sendProgressBarUpdate(this, 0, this.crusher.getEnergyStored(null));
 			for (int i = 0; i < 4; i++)
 				craft.sendProgressBarUpdate(this, i + 1, crusher.crushTime[i]);
+			craft.sendProgressBarUpdate(this, 5, crusher.balance ? 1 : 0);
 		}
 	}
 
@@ -52,6 +53,8 @@ public class ContainerCrusher extends ContainerBase
 	{
 		if (id == 0)
 			this.crusher.setEnergyStored(value);
+		else if (id == 5)
+			crusher.balance = (value != 0);
 		else
 			crusher.crushTime[id - 1] = value;
 	}

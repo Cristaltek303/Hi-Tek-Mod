@@ -96,20 +96,26 @@ public class TileEntityCrusher extends TileEntity implements IEnergyHandler, ISi
 			CrusherRecipe recipe = Recipes.getCrusherRecipe(inventory[slot]);
 			if (recipe == null)
 				return false;
+			
+			boolean mainResult = false;
+			boolean secResult = false;
 			if (inventory[2 * slot + 4] == null)
+				mainResult = true;
+			else if (inventory[2 * slot + 4].isItemEqual(recipe.mainOutput))
 			{
-				if (inventory[2 * slot + 5] == null)
-					return true;
-				else if (!inventory[2 * slot + 5].isItemEqual(recipe.secOutput))
-					return false;
+				int mainSize = inventory[2 * slot + 4].stackSize + recipe.mainOutput.stackSize;
+				mainResult = mainSize <= getInventoryStackLimit() && mainSize <= inventory[2 * slot + 4].getMaxStackSize();
 			}
-			else if (!inventory[2 * slot + 4].isItemEqual(recipe.mainOutput))
-				return false;
-
-			int mainResult = inventory[2 * slot + 4].stackSize + recipe.mainOutput.stackSize;
-			int secResult = inventory[2 * slot + 5].stackSize + recipe.secOutput.stackSize;
-			return (mainResult <= getInventoryStackLimit() && mainResult <= inventory[2 * slot + 4].getMaxStackSize()
-					&& secResult <= getInventoryStackLimit() && secResult <= inventory[2 * slot + 5].getMaxStackSize());
+			
+			if (inventory[2 * slot + 5] == null)
+				secResult = true;
+			else if (inventory[2 * slot + 5].isItemEqual(recipe.secOutput))
+			{
+				int secSize = inventory[2 * slot + 5].stackSize + recipe.secOutput.stackSize;
+				secResult = secSize <= getInventoryStackLimit() && secSize <= inventory[2 * slot + 5].getMaxStackSize();
+			}
+			
+			return mainResult && secResult;
 		}
 	}
 
@@ -124,7 +130,7 @@ public class TileEntityCrusher extends TileEntity implements IEnergyHandler, ISi
 			else if (inventory[2 * slot + 4].getItem() == recipe.mainOutput.getItem())
 				inventory[2 * slot + 4].stackSize += recipe.mainOutput.stackSize;
 
-			if (worldObj.rand.nextFloat() < recipe.chance)
+			if (worldObj.rand.nextFloat() <= recipe.chance)
 			{
 				if (inventory[2 * slot + 5] == null)
 					inventory[2 * slot + 5] = recipe.secOutput.copy();

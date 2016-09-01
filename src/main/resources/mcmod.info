@@ -1,7 +1,7 @@
 [
 {
   "modid": "hitekmod",
-  "name": "Hi-Tek-Mod",
+  "name": "Hi-Tek",
   "description": "Example placeholder mod.",
   "version": "${version}",
   "mcversion": "${mcversion}",

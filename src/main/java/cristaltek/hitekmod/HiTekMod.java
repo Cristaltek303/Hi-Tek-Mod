@@ -1,10 +1,12 @@
 package cristaltek.hitekmod;
 
+import cristaltek.hitekmod.blocks.ModBlocks;
 import cristaltek.hitekmod.items.ModItems;
 import cristaltek.hitekmod.proxy.ServerProxy;
 import cristaltek.hitekmod.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -20,14 +22,15 @@ public class HiTekMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
+		Configs.init(new Configuration(event.getSuggestedConfigurationFile()));
 		ModItems.init();
+		ModBlocks.init();
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
 		ModItems.registerRenders();
+		ModBlocks.registerRenders();
 	}
 	
 	@EventHandler
@@ -36,7 +39,6 @@ public class HiTekMod {
 	}
 
 	public static CreativeTabs tabHiTekMod = new CreativeTabs(Reference.MOD_NAME) {
-		
 		@Override
 		public Item getTabIconItem() {
 			return ModItems.TDTool;

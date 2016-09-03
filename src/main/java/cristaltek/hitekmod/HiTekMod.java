@@ -31,6 +31,7 @@ public class HiTekMod {
 	public void init(FMLInitializationEvent event) {
 		ModItems.registerRenders();
 		ModBlocks.registerRenders();
+		ModCrafting.register();
 	}
 	
 	@EventHandler

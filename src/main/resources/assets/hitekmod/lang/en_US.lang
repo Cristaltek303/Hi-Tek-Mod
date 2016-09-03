@@ -1,5 +1,18 @@
 itemGroup.Hi-Tek=Hi-Tek
 
-item.DarkEnergyIngot=Dark Energy Ingot
+item.DarkEnergyIngot.name=Dark Energy Ingot
+item.CircuitBoard.name=Circuit Board
+item.ConcentratedDarkstar.name=Concentrated Darkstar
+item.CraftingChip.name=Crafting Chip
+item.Darkstar.name=Darkstar
+item.Handle.name=Handle
+item.Imbuer.name=Imbuer
+item.InfusedGoldIngot.name=Infused Gold Ingot
+item.RawSilicon.name=Raw Silicon
+item.Silicon.name=Silicon
+item.StaffHandle.name=Staff Handle
+item.VIChip.name=VI-Chip
+item.VIStabilizer.name=VI-Stabilizer
+
 
 item.TemporalDecompositionTool.name=Temporal Decomposition Tool

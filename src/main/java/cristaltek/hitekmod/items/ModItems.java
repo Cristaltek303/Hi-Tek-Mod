@@ -24,6 +24,7 @@ public class ModItems {
 
 	// Tools
 	public static Item TDTool;
+	public static Item Magnet;
 
 	public static void init() {
 		// Items
@@ -44,6 +45,7 @@ public class ModItems {
 		
 		// Tools
 		TDTool = new ItemTDTool("TemporalDecompositionTool");
+		Magnet = new ItemMagnet("Magnet");
 	}
 	
 	public static void registerRenders() {
@@ -65,6 +67,7 @@ public class ModItems {
 		
 		//Tools
 		registerRender(TDTool);
+		registerRender(Magnet);
 	}
 	
 	private static void registerRender(Item item) {

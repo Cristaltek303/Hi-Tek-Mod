@@ -8,6 +8,8 @@ public class Configs {
 	public static int TDTool_maxEnergy;
 	public static int TDTool_energyPerUse;
 	
+	public static int magnet_strength;
+	
 	public static void init(Configuration configuration) {
 		config = configuration;
 		config.load();
@@ -18,5 +20,7 @@ public class Configs {
 	public static void hydrateConfig() {
 		TDTool_maxEnergy = config.getInt("maxEnergy", "TDTool", 1000000, 10000, 10000000, "The maximum amount of energy that the TDTool can hold");
 		TDTool_energyPerUse = config.getInt("energyPerUse", "TDTool", 128, 10, 1000, "The amount of energy the TDTool consumes per use");
+		
+		magnet_strength = config.getInt("magnetStrength", "misc", 10, 5, 15, "Range of the magnet");
 	}
 }

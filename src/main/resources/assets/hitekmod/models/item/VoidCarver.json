@@ -1,0 +1,28 @@
+{
+    "parent": "item/generated",
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, 55 ],
+            "translation": [ 0, 10.5, 0.5 ],
+            "scale": [ 1.27, 1.27, 0.8 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, -55 ],
+            "translation": [ 0, 10.5, 0.5 ],
+            "scale": [ 1.27, 1.27, 0.8 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, -90, 25 ],
+            "translation": [ 1.13, 4.2, 1.53 ],
+            "scale": [ 1.0, 1.0, 0.5 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 0, 90, -25 ],
+            "translation": [ 1.13, 4.2, 1.53 ],
+            "scale": [ 1.0, 1.0, 0.5 ]
+        }
+    },
+    "textures": {
+        "layer0": "hitekmod:items/VoidCarver"
+    }
+}
